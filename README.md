@@ -8,4 +8,4 @@
 
 ##### Servicios:
 - Auto administados: Es la base de datos que instalas tú y te encargas de actualizaciones, mantenimiento, etc.
--Administrados: Servicios que ofrecen las nubes modernas como Azure y no debes preocuparte por mantenimiento o actualizaciones.
+- Administrados: Servicios que ofrecen las nubes modernas como Azure y no debes preocuparte por mantenimiento o actualizaciones.
