@@ -22,7 +22,7 @@ Las bases de datos **basadas en archivos** eran datos guardados en texto plano, 
 Una **entidad** es algo similar a un objeto ([programación orientada a objetos](https://es.wikipedia.org/wiki/Programaci%C3%B3n_orientada_a_objetos "programación orientada a objetos")) y representa algo en el mundo real, incluso algo abstacto. Tiene atributos que son las cosas que los hacen ser una entidad y por convención se ponen en plural.
 
 
-#### Entidades:
+### Entidades:
 
 **Entidades fuertes**: Esto quiere decir que no dependen de ninguna otra entidad para existir (se representan con un cuadrado).
 
@@ -30,12 +30,12 @@ Una **entidad** es algo similar a un objeto ([programación orientada a objetos]
 
 Las entidades debiles pueden ser debiles por dos mitivos:
 
-    - Débiles por identidad: No se diferencian entre sí más que por la clave de su identidad fuerte.
+- Débiles por identidad: No se diferencian entre sí más que por la clave de su identidad fuerte.
 
-    - Débiles por existencia: Se les asigna una clave propia.
+- Débiles por existencia: Se les asigna una clave propia.
 
 
-#### Atributos:
+### Atributos:
 
 **Atributos compuestos**: Son aquellos que tienen atributos ellos mismos.
 
@@ -45,7 +45,7 @@ Las entidades debiles pueden ser debiles por dos mitivos:
 
 **Atributos llave**: son aquellos que identifican a la entidad y no pueden ser repetidos(se representa con la palabra subrayada). Existen:
     
-    - Naturales: Son inherentes al objeto como el número de serie
+- Naturales: Son inherentes al objeto como el número de serie
 
-    - Clave artificial: No es inherente al objeto y se asigna de manera arbitraria.
+- Clave artificial: No es inherente al objeto y se asigna de manera arbitraria.
 
