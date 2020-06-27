@@ -123,3 +123,11 @@ Las relaciones tienen una propiedad llamada **cardinalidad** y tiene que ver con
 - **Cardinalidad 0 a N**: Una entidad en A se relaciona con cero o muchas entidades en B. Pero ninguna entidad en B se relaciona una entidad en A.
 
 - **Cardinalidad N a N**: Una entidad en A se puede relacionar con 0 o muchas entidades en B y viceversa.
+
+
+
+## Diagrama ER ([Entidad Relacion](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model#Cardinalities "Entidad Relacion"))
+
+Un diagrama es como un mapa y nos ayuda a entender cuáles son las entidades con las que vamos a trabajar, cuáles son sus relaciones y qué papel van a jugar en las aplicaciones de la base de datos.
+
+Existen varias nomenclaturas para hacer este tipo de diagramas pero esta era la origial y es una de las mas utilizadas.
