@@ -114,8 +114,12 @@ Las **relaciones** nos permiten ligar o unir nuestras diferentes entidades y se 
 Las relaciones tienen una propiedad llamada **cardinalidad** y tiene que ver con números. Cuántos de un lado pertenecen a cuántos del otro lado:
 
 
-- Cardinalidad: 1 a 1
-- Cardinalidad: 0 a 1
-- Cardinalidad: 1 a N
-- Cardinalidad: 0 a N
-- Cardinalidad: N a N
+- **Cardinalidad 1 a 1**: Un registro de una entidad A se relaciona con solo un registro en una entidad B y viceversa.
+
+- **Cardinalidad 0 a 1**: Un registro de una entidad A se relaciona con solo un registro en una entidad B y pero ningún registro de B se relaciona con A.
+
+- **Cardinalidad 1 a N**: Una entidad en A se relaciona con cero o muchas entidades en B. Pero una entidad en B se relaciona con una única entidad en A.
+
+- **Cardinalidad 0 a N**: Una entidad en A se relaciona con cero o muchas entidades en B. Pero ninguna entidad en B se relaciona una entidad en A.
+
+- **Cardinalidad N a N**: Una entidad en A se puede relacionar con 0 o muchas entidades en B y viceversa.
