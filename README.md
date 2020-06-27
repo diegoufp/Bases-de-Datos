@@ -174,7 +174,7 @@ La fecha y hora en general en las bases de datos, es de los datos mas interesant
 
 ## Diagrama Físico: normalización
 
-La normalización como su nombre lo indica nos ayuda a dejar todo de una forma normal. Esto obedece a las [12 reglas de Codd](https://github.com/diegoufp/Bases-de-Datos#historia-de-las-rdb-bases-de-datos-relacionales "12 reglas de Codd") y nos permiten separar componentes en la base de datos:
+La [normalización](https://platzi.com/blog/normalizar-una-base-de-datos-y-no-morir-en-el-intento/ "normalización") como su nombre lo indica nos ayuda a dejar todo de una forma normal. Esto obedece a las [12 reglas de Codd](https://github.com/diegoufp/Bases-de-Datos#historia-de-las-rdb-bases-de-datos-relacionales "12 reglas de Codd") y nos permiten separar componentes en la base de datos:
 
 
 - **Primera forma normal (1FN)**: Atributos atómicos (Sin campos repetidos)
