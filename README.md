@@ -77,9 +77,9 @@ Una **entidad** es algo similar a un objeto ([programación orientada a objetos]
 
 Las entidades debiles pueden ser debiles por dos mitivos:
 
-- Débiles por identidad: No se diferencian entre sí más que por la clave de su identidad fuerte.
+- **Débiles por identidad**: No se diferencian entre sí más que por la clave de su identidad fuerte.
 
-- Débiles por existencia: Se les asigna una clave propia.
+- **Débiles por existencia**: Se les asigna una clave propia.
 
 
 ### Atributos:
@@ -92,9 +92,9 @@ Las entidades debiles pueden ser debiles por dos mitivos:
 
 **Atributos llave**: son aquellos que identifican a la entidad y no pueden ser repetidos(se representa con la palabra subrayada). Existen:
     
-- Naturales: Son inherentes al objeto como el número de serie
+- **Naturales**: Son inherentes al objeto como el número de serie
 
-- Clave artificial: No es inherente al objeto y se asigna de manera arbitraria.
+- **Clave artificial**: No es inherente al objeto y se asigna de manera arbitraria.
 
 
 
@@ -105,3 +105,16 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 - **Primer paso**: Identificar las entidades.
 - **Segundo paso**: Pensar en los atributos.
 
+
+
+## Relaciones 
+
+Las **relaciones** nos permiten ligar o unir nuestras diferentes entidades y se representan con rombos. Por convención se definen a través de verbos.
+
+Las relaciones tienen una propiedad llamada **cardinalidad** y tiene que ver con números. Cuántos de un lado pertenecen a cuántos del otro lado:
+
+
+- Cardinalidad: 1 a 1
+- Cardinalidad: 0 a 1
+- Cardinalidad: 1 a N
+- Cardinalidad: 0 a N
