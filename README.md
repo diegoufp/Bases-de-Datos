@@ -171,3 +171,16 @@ La fecha y hora en general en las bases de datos, es de los datos mas interesant
 - **CHECK**: Se asegura que el valor en la columna cumpla una condición dada.
 - **DEFAULT**: Coloca un valor por defecto cuando no hay un valor especificado.
 - **INDEX**: permite búsquedas más ágiles. Útil cuando se requieren lecturas frecuentes, sin escritura constante de datos.
+
+## Diagrama Físico: normalización
+
+La normalización como su nombre lo indica nos ayuda a dejar todo de una forma normal. Esto obedece a las [12 reglas de Codd](https://github.com/diegoufp/Bases-de-Datos#historia-de-las-rdb-bases-de-datos-relacionales "12 reglas de Codd") y nos permiten separar componentes en la base de datos:
+
+
+- **Primera forma normal (1FN)**: Atributos atómicos (Sin campos repetidos)
+
+- **Segunda forma normal (2FN)**: Cumple 1FN y cada campo de la tabla debe depender de una clave única.
+
+- **Tercera forma normal (3FN)**: Cumple 1FN y 2FN y los campos que NO son clave, NO deben tener dependencias.
+
+- **Cuarta forma normal (4FN)**: Cumple 1FN, 2FN, 3FN y los campos multivaluados se identifican por una clave única.
