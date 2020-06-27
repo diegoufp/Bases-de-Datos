@@ -118,3 +118,4 @@ Las relaciones tienen una propiedad llamada **cardinalidad** y tiene que ver con
 - Cardinalidad: 0 a 1
 - Cardinalidad: 1 a N
 - Cardinalidad: 0 a N
+- Cardinalidad: N a N
