@@ -96,3 +96,12 @@ Las entidades debiles pueden ser debiles por dos mitivos:
 
 - Clave artificial: No es inherente al objeto y se asigna de manera arbitraria.
 
+
+
+## Entidades de un Blogpost
+
+Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos representará retos muy interesantes.
+
+- **Primer paso**: Identificar las entidades.
+- **Segundo paso**: Pensar en los atributos.
+
