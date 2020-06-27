@@ -140,10 +140,27 @@ Para llevar a la práctica un diagrama debemos ir más allá y darle detalle con
 
 ### Tipos de dato:
 
-- **Texto**: CHAR(n), VARCHAR(n), TEXT.
-- **Números**: INTEGER, BIGINT, SMALLINT, DECIMAL(n,s), NUMERIC(n,s).
-- **Fecha/hora**: DATE, TIME, DATETIME, TIMESTAMP.
-- **Lógicos**: BOOLEAN.
+#### Texto:
+- **CHAR**: almacenamiento de cadenas de caracteres.
+- **VARCHAR**: almacenamiento de cadenas de caracteres con mayor dinamismo, para cuando no conocemos con exactitud el tamaño de las cadenas de texto que queremos introducir. Puede contener un maximo de 255 caracteres.
+- **TEXT**: almacenamiento de grandes cadenas de caracteres.
+
+#### Números: 
+- **INTEGER**: números sin decimales.
+- **BIGINT**: números enteros de gran tamaño.
+- **SMALLINT**: números enteros de mínimo tamaño (99 o menos).
+- **DECIMAL**: almacena números con parte decimal.
+- **NUMERIC**: mismo funcionamiento que DECIMAL.
+
+#### Fecha/hora: 
+La fecha y hora en general en las bases de datos, es de los datos mas interesantes, por que internamente nos sirve para saber cuando fue creado un registro, cuando alguien lo modificó, cuando alguien los borró. 
+
+- **DATE**: soporta datos de AÑO/MES/DÍA.
+- **TIME**: guarda datos de HORA DEL DÍA.
+- **DATETIME y TIMESTAMP**: combina DATE+TIME.
+
+#### Lógicos: 
+- **BOOLEAN**: Verdadero o Falso.
 
 ### Constraints (Restricciones)
 
@@ -153,4 +170,4 @@ Para llevar a la práctica un diagrama debemos ir más allá y darle detalle con
 - **FOREIGN KEY**: Identifica de manera única una tupla en otra tabla.
 - **CHECK**: Se asegura que el valor en la columna cumpla una condición dada.
 - **DEFAULT**: Coloca un valor por defecto cuando no hay un valor especificado.
-- **INDEX**: Se crea por columna para permitir búsquedas más rápidas.
+- **INDEX**: permite búsquedas más ágiles. Útil cuando se requieren lecturas frecuentes, sin escritura constante de datos.
