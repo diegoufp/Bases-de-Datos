@@ -181,6 +181,6 @@ La [normalización](https://platzi.com/blog/normalizar-una-base-de-datos-y-no-mo
 
 - **Segunda forma normal (2FN)**: Cumple 1FN y cada campo de la tabla debe depender de una clave única.
 
-- **Tercera forma normal (3FN)**: Cumple 1FN y 2FN y los campos que NO son clave, NO deben tener dependencias.
+- **Tercera forma normal (3FN)**: Cumple 1FN y 2FN y los campos que NO son clave, NO deben tener dependencias (Crear una tabla separada por cada grupo de datos relacionados.)
 
 - **Cuarta forma normal (4FN)**: Cumple 1FN, 2FN, 3FN y los campos multivaluados se identifican por una clave única.
