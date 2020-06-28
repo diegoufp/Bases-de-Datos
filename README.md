@@ -179,6 +179,8 @@ La fecha y hora en general en las bases de datos, es de los datos mas interesant
 - **DEFAULT**: Coloca un valor por defecto cuando no hay un valor especificado.
 - **INDEX**: permite búsquedas más ágiles. Útil cuando se requieren lecturas frecuentes, sin escritura constante de datos.
 
+
+
 ## Diagrama Físico: normalización
 
 La [normalización](https://platzi.com/blog/normalizar-una-base-de-datos-y-no-morir-en-el-intento/ "normalización") como su nombre lo indica nos ayuda a dejar todo de una forma normal. Esto obedece a las [12 reglas de Codd](https://github.com/diegoufp/Bases-de-Datos#historia-de-las-rdb-bases-de-datos-relacionales "12 reglas de Codd") y nos permiten separar componentes en la base de datos:
@@ -240,3 +242,18 @@ Aplicado al ejemplo anterior la tabla materia se independiza y se relaciona con 
 De esta manera, aunque parezca que la información se multiplicó, en realidad la descompusimos o normalizamos de manera que a un sistema le sea fácil de reconocer y mantener la consistencia de los datos.
 
 Algunos autores precisan una 5FN que hace referencia a que después de realizar esta normalización a través de uniones (JOIN) permita regresar a la data original de la cual partió.
+
+
+
+## RDBMS
+
+RDBMS significa Relational Database Management System o sistema manejador de bases de datos relacionales. Es un programa que se encarga de seguir las reglas de Codd y se puede utilizar de manera programática.
+
+Hay dos maneras de acceder a manejadores de bases de datos:
+
+- Instalar en máquina local un administrador de bases relacional.
+- Tener ambientes de desarrollo especiales o servicios cloud.
+
+En este curso usaremos MySQL porque tiene un impacto histórico siendo muy utilizado y además es software libre y gratuito. La versión 5.6.43 es compatible con la mayoría de aplicaciones y frameworks.
+
+- Root es el usuario principal que tendrá todos los permisos y por lo tanto en ambientes de producción hay que tener mucho cuidado al configurarlo.
