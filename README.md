@@ -105,6 +105,12 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 - **Primer paso**: Identificar las entidades.
 - **Segundo paso**: Pensar en los atributos.
 
+### Normalizando en diagrama fisico
+
+- **Regla general**: 
+Cuando tienes una relacion uno a uno, no importa a cual tabla le pongas la referencia de la otra tabla([FOREIGN KEY](https://github.com/diegoufp/Bases-de-Datos#constraints-restricciones "OREIGN KEY")), es indistinto.
+
+Cuando tiene una relacion uno a muchos es muy importante que en la tabla donde tienes la terminacion **muchos**, en esa tabla, vas a poner la llave foranea de la tabla que tiene uno.
 
 
 ## Relaciones 
