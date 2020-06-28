@@ -254,6 +254,26 @@ Hay dos maneras de acceder a manejadores de bases de datos:
 - Instalar en máquina local un administrador de bases relacional.
 - Tener ambientes de desarrollo especiales o servicios cloud.
 
-En este curso usaremos MySQL porque tiene un impacto histórico siendo muy utilizado y además es software libre y gratuito. La versión 5.6.43 es compatible con la mayoría de aplicaciones y frameworks.
+En este curso usaremos [MySQL](https://dev.mysql.com/downloads/ "MySQL") porque tiene un impacto histórico siendo muy utilizado y además es software libre y gratuito. La versión 5.6.43 es compatible con la mayoría de aplicaciones y frameworks.
 
 - Root es el usuario principal que tendrá todos los permisos y por lo tanto en ambientes de producción hay que tener mucho cuidado al configurarlo.
+
+## Usar mysql en KALI LINUX 2020.b
+
+$ `sudo apt-get install mariadb-client`
+
+$ `sudo apt-get install mariadb-server`
+
+$ `sudo service mysql start`
+
+$ `sudo mariadb`
+
+#### Ya en MariaDB
+
+$ MariaDB [(none)]> `show databases`
+
+$ MariaDB [(none)]> `use mysql`
+
+$ MariaDB [(mysql)]> `show tables`
+
+$ MariaDB [(mysql)]>`exit`
