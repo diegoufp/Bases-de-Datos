@@ -277,3 +277,18 @@ $ MariaDB [(none)]> `use mysql`
 $ MariaDB [(mysql)]> `show tables`
 
 $ MariaDB [(mysql)]>`exit`
+
+
+
+## Servicios administrados
+
+Hoy en día muchas empresas ya no tienen instalados en sus servidores los **RDBMS** sino que los contratan a otras personas. Estos servicios administrados cloud te permiten concentrarte en la base de datos y no en su administración y actualización.
+
+
+
+## Historia de SQL
+
+**SQL** significa **S**tructured **Q**uery **L**anguage y tiene una estructura clara y fija. Su objetivo es hacer un solo lenguaje para consultar cualquier manejador de bases de datos volviéndose un gran estándar. Es un lenguaje de dominio específico utilizado en programación, diseñado para administrar, y recuperar información de sistemas de gestión de bases de datos relacionales
+
+Ahora existe el **NOSQL** o **N**ot **O**nly **S**tructured **Q**uery **L**anguage que significa que no sólo se utiliza SQLen las bases de datos no relacionales.
+Israel Vázquez Morales
