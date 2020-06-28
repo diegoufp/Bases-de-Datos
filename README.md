@@ -292,3 +292,47 @@ Hoy en día muchas empresas ya no tienen instalados en sus servidores los **RDBM
 
 Ahora existe el **NOSQL** o **N**ot **O**nly **S**tructured **Q**uery **L**anguage que significa que no sólo se utiliza SQLen las bases de datos no relacionales.
 Israel Vázquez Morales
+
+
+
+## [DDL](https://www.w3schools.in/mysql/ddl-dml-dcl/ "DDL") create
+
+**SQL** tiene dos grandes sublenguajes:
+**DDL** o [Data Definition Language](https://en.wikipedia.org/wiki/Data_definition_language "Data Definition Language") que nos ayuda a crear la estructura de una base de datos. Existen 3 grandes comandos:
+
+- **Create** (Crear): Este comando permite crear objetos de datos, como nuevas bases de datos, tablas, vistas, índices, etc.
+- **Alter** (Alterar): Este comando permite modificar la estructura de una tabla u objeto.
+- **Drop** (Eliminar): Este comando elimina un objeto de la base de datos
+- **Truncate** (Truncar): Este comando solo aplica a tablas y su función es borrar el contenido completo de la tabla especificada.
+
+**3 objetos que manipularemos con el lenguaje DDL**:
+
+- Database o bases de datos
+- Table o tablas. Son la traducción a SQL de las entidades
+- View o vistas: Se ofrece la proyección de los datos de la base de datos de forma entendible.
+
+### Comandos
+
+- **Creas base de datos**:
+`CREATE DATABASE test_db;`
+
+- **Usar base de datos**:
+`USE DATABASE test_db;`
+
+- **Creas tabla**:
+`CREATE TABLE people (person_id int, last_name varchar(255), first_name varchar(255), address varchar(255), city varchar(255));`
+
+
+### Crear base de datos de ejemplo
+
+`$ sudo mariadb`
+
+`> use mysql`
+
+``> CREATE SCHEMA `blogpost` DEFAULT CHARACTER SET utf8;``
+
+`> USE blogpost`
+
+``> CREATE TABLE `blogpost`.`people` (`person_id` INT NOT NULL AUTO_INCREMENT, `last_name` VARCHAR(255) NULL, `first_name` VARCHAR(255) NULL, `address` VARCHAR(255) NULL, `city` VARCHAR(255) NULL, PRIMARY KEY (`person_id`));``
+
+
