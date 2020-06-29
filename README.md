@@ -300,10 +300,9 @@ Israel Vázquez Morales
 **SQL** tiene dos grandes sublenguajes:
 **DDL** o [Data Definition Language](https://en.wikipedia.org/wiki/Data_definition_language "Data Definition Language") que nos ayuda a crear la estructura de una base de datos. Existen 3 grandes comandos:
 
-- **Create** (Crear): Este comando permite crear objetos de datos, como nuevas bases de datos, tablas, vistas, índices, etc.
-- **Alter** (Alterar): Este comando permite modificar la estructura de una tabla u objeto.
-- **Drop** (Eliminar): Este comando elimina un objeto de la base de datos
-- **Truncate** (Truncar): Este comando solo aplica a tablas y su función es borrar el contenido completo de la tabla especificada.
+- [**Create**](https://github.com/diegoufp/Bases-de-Datos#create "CREATE") (Crear): Este comando permite crear objetos de datos, como nuevas bases de datos, tablas, vistas, índices, etc.
+- [**Alter**](https://github.com/diegoufp/Bases-de-Datos#create-view-y-ddl-alter "ALTER") (Alterar): Este comando permite modificar la estructura de una tabla u objeto.
+- [**Drop**](https://github.com/diegoufp/Bases-de-Datos#ddl-drop "DROP") (Eliminar): Este comando elimina un objeto de la base de datos
 
 **3 objetos que manipularemos con el lenguaje DDL**:
 
@@ -311,7 +310,7 @@ Israel Vázquez Morales
 - Table o tablas. Son la traducción a SQL de las entidades
 - View o vistas: Se ofrece la proyección de los datos de la base de datos de forma entendible.
 
-### Comandos
+### CREATE
 
 - **Creas base de datos**:
 `CREATE DATABASE test_db;`
@@ -323,7 +322,7 @@ Israel Vázquez Morales
 `CREATE TABLE people (person_id int, last_name varchar(255), first_name varchar(255), address varchar(255), city varchar(255));`
 
 
-### Crear base de datos de ejemplo
+#### Crear base de datos de ejemplo
 
 `$ sudo mariadb`
 
@@ -337,7 +336,7 @@ Israel Vázquez Morales
 
 
 
-##  CREATE VIEW y DDL ALTER
+###  CREATE VIEW y DDL ALTER
 
 **VIEW** sirve para representar los datos que necesitamos, hacer un consulta especifica y se identifica las vistas con una v al principio del nombre.
 
@@ -358,7 +357,7 @@ Israel Vázquez Morales
                     `DROP COLUMN date_of_birth;`
 
 
-### Usar comandos en un ejemplo
+#### Usar comandos en un ejemplo
 
 `> USE blogpost;`
 
@@ -372,7 +371,7 @@ Israel Vázquez Morales
 
 
 
-## DDL drop
+### DDL drop
 
 Está puede ser la sentencia ¡más peligrosa!, sobre todo cuando somos principiantes. Básicamente borra o desaparece de nuestra base de datos algún elemento.
 
@@ -380,5 +379,13 @@ Está puede ser la sentencia ¡más peligrosa!, sobre todo cuando somos principi
 
 - Borrar base de datos: `DROP DATABASE test_db;`
 
-### Usar comandos en un ejemplo
+#### Usar comandos en un ejemplo
+
+`> USE blogpost;`
+
+``> DROP TABLE `blogpost`.`people`;``
+
+``> SELECT*FROM blogpost.people;``
+
+``> DROP DATABASE `blogpost`;``
 
