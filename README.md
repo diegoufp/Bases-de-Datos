@@ -349,7 +349,7 @@ Israel Vázquez Morales
 **ALTER** ES el comando que nos va a permitir modificar.
 
 - Agregar columna:  `ALTER TABLE people`
-                    `ADD date_of_birth date:`
+                    `ADD date_of_birth date;`
 
 - Alterar columna:  `ALTER TABLE people`
                     `ALTER COLUMN date_of_birth year;`
