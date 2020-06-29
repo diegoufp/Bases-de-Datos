@@ -336,3 +336,36 @@ Israel Vázquez Morales
 ``> CREATE TABLE `blogpost`.`people` (`person_id` INT NOT NULL AUTO_INCREMENT, `last_name` VARCHAR(255) NULL, `first_name` VARCHAR(255) NULL, `address` VARCHAR(255) NULL, `city` VARCHAR(255) NULL, PRIMARY KEY (`person_id`));``
 
 
+
+##  CREATE VIEW y DDL ALTER
+
+**VIEW** sirve para representar los datos que necesitamos, hacer un consulta especifica y se identifica las vistas con una v al principio del nombre.
+
+- Vista: `CREATE VIEW v_brasil_customers AS`
+            `SELECT customer_name, contact_name`
+            `FROM customers`
+            `WHETE country = "Brasil";`
+
+**ALTER** ES el comando que nos va a permitir modificar.
+
+- Agregar columna:  `ALTER TABLE people`
+                    `ADD date_of_birth date:`
+
+- Alterar columna:  `ALTER TABLE people`
+                    `ALTER COLUMN date_of_birth year;`
+
+- Borrar columna:   `ALTER TABLE people`
+                    `DROP COLUMN date_of_birth;`
+
+
+### Usar comandos en un ejemplo
+
+`> USE blogpost;`
+
+``> CREATE OR REPLACE VIEW `v_blogpost_people` AS SELECT * FORM blogpost.people;``
+
+``> ALTER TABLE `blogpost`.`people` ADD COLUMN `date_of_birth` DATETIME NULL AFTER `city`;``
+
+``> ALTER TABLE `blogpost`.`people` CHANGE COLUMN `date_of_birth` `date_of_birth` VARCHAR(30) NULL DEFAULT NULL;``
+
+``> ALTER TABLE `blogpost`.`people` DROP COLUMN `date_of_birth`;``
