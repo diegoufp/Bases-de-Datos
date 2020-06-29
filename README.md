@@ -369,3 +369,16 @@ Israel Vázquez Morales
 ``> ALTER TABLE `blogpost`.`people` CHANGE COLUMN `date_of_birth` `date_of_birth` VARCHAR(30) NULL DEFAULT NULL;``
 
 ``> ALTER TABLE `blogpost`.`people` DROP COLUMN `date_of_birth`;``
+
+
+
+## DDL drop
+
+Está puede ser la sentencia ¡más peligrosa!, sobre todo cuando somos principiantes. Básicamente borra o desaparece de nuestra base de datos algún elemento.
+
+- Borrar tabla: `DROP TABLE people;`
+
+- Borrar base de datos: `DROP DATABASE test_db;`
+
+### Usar comandos en un ejemplo
+
