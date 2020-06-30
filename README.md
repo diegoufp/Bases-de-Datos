@@ -402,7 +402,7 @@ Está puede ser la sentencia ¡más peligrosa!, sobre todo cuando somos principi
 - [**INSERT**](https://github.com/diegoufp/Bases-de-Datos#insert "INSERT"): Inserta o agrega nuevos registros a la tabla.
 - [**UPDATE**](https://github.com/diegoufp/Bases-de-Datos#update "UPDATE"): Actualiza o modifica los datos que ya existen.
 - [**DELETE**](https://github.com/diegoufp/Bases-de-Datos#delete "DELETE"): Esta sentencia es riesgosa porque puede borrar el contenido de una tabla.
-- Select: Trae información de la base de datos.
+- [**SELECT**](https://github.com/diegoufp/Bases-de-Datos#select "SELECT"): Trae información de la base de datos.
 
 ### INSERT
 
