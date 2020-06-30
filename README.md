@@ -334,6 +334,10 @@ Israel Vázquez Morales
 
 ``> CREATE TABLE `blogpost`.`people` (`person_id` INT NOT NULL AUTO_INCREMENT, `last_name` VARCHAR(255) NULL, `first_name` VARCHAR(255) NULL, `address` VARCHAR(255) NULL, `city` VARCHAR(255) NULL, PRIMARY KEY (`person_id`));``
 
+`> SHOW TABLES FROM blogpost;`
+
+`> SELECT * FROM people;`
+
 
 
 ###  CREATE VIEW y DDL ALTER
@@ -388,4 +392,100 @@ Está puede ser la sentencia ¡más peligrosa!, sobre todo cuando somos principi
 ``> SELECT*FROM blogpost.people;``
 
 ``> DROP DATABASE `blogpost`;``
+
+
+
+## DML
+
+**DML** trata del contenido de la base de datos. Son las siglas de **D**ata **M**anipulation **L**anguage y sus comandos son:
+
+- [**INSERT**](https://github.com/diegoufp/Bases-de-Datos#insert "INSERT"): Inserta o agrega nuevos registros a la tabla.
+- [**UPDATE**](https://github.com/diegoufp/Bases-de-Datos#update "UPDATE"): Actualiza o modifica los datos que ya existen.
+- [**DELETE**](https://github.com/diegoufp/Bases-de-Datos#delete "DELETE"): Esta sentencia es riesgosa porque puede borrar el contenido de una tabla.
+- Select: Trae información de la base de datos.
+
+### INSERT
+
+Inserta renglones por cada sentencia "Insert" que hagamos.
+Normalme el valor por defecto es NULL.
+
+`INSERT INTO people (last_name, first_name, address, city)`
+`VALUES ('Hernandez', 'Laura', 'Calle 21', 'Monterrey');`
+
+Hay que tener mucho cuidado a la hora de mantener el orden tanto en la parte de los campos como en el de VALUES.
+
+#### Usar INSERT en un ejemplo
+
+``> INSERT INTO people(last_name, first_name, address, city) VALUES('Hernandez', 'Laura', 'Calle 21', 'Monterrey');``
+
+``> SELECT * FROM people;``
+
+### UPDATE
+
+Modificar los datos que ya tenemos, update no va a insertar los datos si no existen ya en nuestra tabla.
+
+- Lo que va hacer es tomar la persona donde tenga el id numero 1 y le va a cambiar el apellido a Chavez y le va a cambiar la ciudad a Merida: 
+
+``UPDATE people``
+``SET last_name = 'Chavez', city = 'Merida'``
+``WHERE person_id = 1;``
+
+- En este le pondremos el primer nombre Juan y eso se va hacer en todos renglones donde la ciudad sea Merida: 
+
+``UPDATE people``
+``SET first_name = 'Juan'``
+``WHERE city = 'Merida';``
+
+- Se esta haciendo un update inseguro, es decir que se esta haciendo un update masivo:
+
+``UPDATE people``
+``SET first_name = 'Juan';``
+
+#### Usar UPDATE en un ejemplo
+
+``> UPDATE people SET last_name = 'Chavez', city = 'Merida' WHERE person_id = 1;``
+
+``> UPDATE people SET first_name = 'Juan' WHERE city = 'Merida';``
+
+``> SELECT * FROM people;``
+
+### DELETE
+
+Esta es una sentencia DML que puede borrar el contenido de una tabla
+
+- Va aborrar el renglon con el person_id 1:
+
+``DELETE FROM people``
+``WHERE person_id = 1;``
+
+- Va a borrar toda la tabla:
+
+``DELETE FROM people;``
+
+#### Usar DELETE en un ejemplo
+
+``> DELETE FROM people WHERE person_id = 1;``
+
+``> SELECT * FROM people;``
+
+### SELECT
+
+SELECT lo que hace es traernos informacionde la base de datos.
+
+- Que campos quieres ver:
+
+``SELECT first_name, last_name``
+
+- De donde quieres obtener esos campos:
+
+``FROM people``
+
+- Para no tener que ver todo los datos especificas mas con la sentencia where:
+
+``WHERE person_id = 2;``
+
+#### Usar SELECT en un ejemplo
+
+``SELECT first_name, last_name FROM people WHERE person_id = 2; ``
+
 
