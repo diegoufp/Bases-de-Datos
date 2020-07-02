@@ -555,3 +555,8 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 
 ``> ALTER TABLE `blogpost`.`posts_etiquetas` ADD INDEX `postsetiquetas_etiquetas_idx` (`etiqueta_id` ASC);``
 ``> ALTER TABLE `blogpost`.`posts_etiquetas` ADD CONSTRAINT `postsetiquetas_etiquetas` FOREIGN KEY (`etiqueta_id`) REFERENCES `blogpost`.`etiquetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
+
+## ¿Por qué las consultas son tan importantes?
+
+Las consultas o queries a una base de datos son una parte fundamental ya que esto podría salvar un negocio o empresa.
+Alrededor de las consultas a las bases de datos se han creado varias especialidades como **ETL** o transformación de datos, [**business intelligence**](https://es.wikipedia.org/wiki/Inteligencia_empresarial "business intelligence") e incluso [**machine learning**](https://es.wikipedia.org/wiki/Aprendizaje_autom%C3%A1tico "machine learning").
