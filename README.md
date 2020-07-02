@@ -505,7 +505,7 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 
 ``> USE blogpost;``
 
-#### Entidad categoiras:
+#### Entidad categorias:
 
 ``> CREATE TABLE `blogpost`.`categorias` (`id` INT NOT NULL AUTO_INCREMENT, `nombres_categoria` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));``
 
