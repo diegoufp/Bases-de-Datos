@@ -561,3 +561,10 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 Las consultas o queries a una base de datos son una parte fundamental ya que esto podría salvar un negocio o empresa.
 Alrededor de las consultas a las bases de datos se han creado varias especialidades como [**ETL**](https://es.wikipedia.org/wiki/Extract,_transform_and_load "ETL") o transformación de datos, [**business intelligence**](https://es.wikipedia.org/wiki/Inteligencia_empresarial "business intelligence") e incluso [**machine learning**](https://es.wikipedia.org/wiki/Aprendizaje_autom%C3%A1tico "machine learning").
 
+## Estructura básica de un Query
+
+Los queries son la forma en la que estructuramos las preguntas que se harán a la base de datos. Transforma preguntas en sintaxis.
+
+El query tiene básicamente 2 partes: **SELECT** y **FROM** y puede aparecer una tercera como **WHERE**.
+
+- La estrellita o asterisco (*) quiere decir que vamos a seleccionar todo sin filtrar campos.
