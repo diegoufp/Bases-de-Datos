@@ -489,3 +489,9 @@ SELECT lo que hace es traernos informacionde la base de datos.
 ``SELECT first_name, last_name FROM people WHERE person_id = 2; ``
 
 
+
+## ¿Qué tan standard es SQL?
+
+Las necesidades solucionaba el standard **SQL** es unificar la forma en la que pensamos y hacemos preguntas a un repositorio, en este caso una Base de Datos Relacional.
+
+Debido a esto las sentencias DDL y DML son exactamente las mismas para distintos manejadores de base de datos que tengan el standard SQL, existes algunos cambios sutiles que mas son funcionamiento interno del manejador de DB.
