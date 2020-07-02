@@ -591,6 +591,8 @@ Los filtros que quiero que mis datos agrupados:
 
 ### Ejemplos de Querys
 
+Para los ejemplos usaremos los datos del [Expetimento de un Blogpost](https://github.com/diegoufp/Bases-de-Datos#expetimento-de-un-blogpost "Expetimento de un Blogpost") y para rellenar los datos usaremos estos [Datos de prueba](https://github.com/diegoufp/Bases-de-Datos/blob/master/Datos_De_prueba.txt "Datos de prueba").
+
 - ¿Cuántos tags tienen cada post?
 
 ``SELECT  posts.titulo, COUNT(*) AS num_etiquetas``
