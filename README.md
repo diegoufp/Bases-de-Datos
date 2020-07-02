@@ -663,4 +663,4 @@ Para los ejemplos usaremos los datos del [Expetimento de un Blogpost](https://gi
 ``SELECT	*``
 ``FROM	usuarios ``
 ``LEFT JOIN posts on usuarios.id = posts.usuario_id``
-``WHERE	posts.usuario_id IS NULL``
+``WHERE	posts.usuario_id IS NULL;``
