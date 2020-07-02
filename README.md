@@ -97,14 +97,6 @@ Las entidades debiles pueden ser debiles por dos mitivos:
 - **Clave artificial**: No es inherente al objeto y se asigna de manera arbitraria.
 
 
-
-## Entidades de un Blogpost
-
-Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos representará retos muy interesantes.
-
-- **Primer paso**: Identificar las entidades.
-- **Segundo paso**: Pensar en los atributos.
-
 ### Normalizando en diagrama fisico
 
 #### Regla general:
@@ -495,3 +487,71 @@ SELECT lo que hace es traernos informacionde la base de datos.
 Las necesidades solucionaba el standard **SQL** es unificar la forma en la que pensamos y hacemos preguntas a un repositorio, en este caso una Base de Datos Relacional.
 
 Debido a esto las sentencias DDL y DML son exactamente las mismas para distintos manejadores de base de datos que tengan el standard SQL, existes algunos cambios sutiles que mas son funcionamiento interno del manejador de DB.
+
+## Expetimento de un Blogpost
+
+Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos representará retos muy interesantes.
+
+- **Primer paso**: Identificar las entidades.
+- **Segundo paso**: Pensar en los atributos.
+
+### Tablas independientes
+
+- Una buena práctica es comenzar creando las entidades que no tienen una llave foránea.
+
+- Generalmente en los nombres de bases de datos se evita usar eñes o acentos para evitar problemas en los manejadores de las bases de datos.
+
+``> CREATE SCHEMA `blogpost`;``
+
+``> USE blogpost;``
+
+#### Entidad categoiras:
+
+``> CREATE TABLE `blogpost`.`categorias` (`id` INT NOT NULL AUTO_INCREMENT, `nombres_categoria` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));``
+
+#### Entidad etiquetas:
+
+``> CREATE TABLE `blogpost`.`etiquetas` (`id` INT NOT NULL AUTO_INCREMENT, `nombre_etiquetas` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));``
+
+#### Entidad usuarios:
+
+``> CREATE TABLE `blogpost`.`usuarios` (`id` INT NOT NULL AUTO_INCREMENT, `login` VARCHAR(30) NOT NULL, `password` VARCHAR(32) NOT NULL, `nickname` VARCHAR(40) NOT NULL, `email` VARCHAR(40) NOT NULL, PRIMARY KEY (`id`), UNIQUE INDEX `email_UNIQUE`(`email` ASC));``
+
+### Tablas dependientes
+
+- El comando “cascade” sirve para que cada que se haga un update en la tabla principal, se refleje también en la tabla en la que estamos creando la relación.
+
+#### Entidad posts:
+
+``> CREATE TABLE `blogpost`.`posts` (`id` INT NOT NULL AUTO_INCREMENT, `titulo` VARCHAR(130) NOT NULL, `fecha_publicacion` TIMESTAMP NULL, `contenido` TEXT NOT NULL, `estatus` CHAR(8) NULL DEFAULT 'activo', `usuario_id` INT NOT NULL, `categoria_id` INT NOT NULL, PRIMARY KEY (`id`));``
+
+``> ALTER TABLE `blogpost`.`posts` ADD INDEX `posts_usuarios_idx` (`usuario_id` ASC);``
+``> ALTER TABLE `blogpost`.`posts` ADD CONSTRAINT `posts_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `blogpost`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;``
+
+``> ALTER TABLE `blogpost`.`posts` ADD INDEX `posts_categorias_idx` (`categoria_id` ASC);``
+``> ALTER TABLE `blogpost`.`posts` ADD CONSTRAINT `posts_categorias` FOREIGN KEY (`categoria_id`) REFERENCES `blogpost`.`categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
+
+#### Entidad comentarios
+
+``> CREATE TABLE `blogpost`.`comentarios` (`id` INT NOT NULL AUTO_INCREMENT, `cuerpo_comentario` TEXT NOT NULL, `usuario_id` INT NOT NULL, `post_id` INT NOT NULL, PRIMARY KEY (`id`));``
+
+``> ALTER TABLE `blogpost`.`comentarios` ADD INDEX `comentarios_usuario_idx` (`usuario_id` ASC);``
+``> ALTER TABLE `blogpost`.`comentarios` ADD CONSTRAINT `comentarios_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `blogpost`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
+
+``> ALTER TABLE `blogpost`.`comentarios` ADD INDEX `comentarios_post_idx` (`post_id` ASC);``
+``> ALTER TABLE `blogpost`.`comentarios` ADD CONSTRAINT `comentarios_posts` FOREIGN KEY (`post_id`) REFERENCES `blogpost`.`posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
+
+### Tablas transitivas
+
+- Las tablas transitivas sirven como puente para unir dos tablas. No tienen contenido semántico.
+- **Reverse Engineer** nos reproduce el esquema del cual nos basamos para crear nuestras tablas. Es útil cuando llegas a un nuevo trabajo y quieres entender cuál fue la mentalidad que tuvieron al momento de crear las bases de datos.
+
+#### Tabla transitiva
+
+``> CREATE TABLE `blogpost`.`posts_etiquetas` (`id` INT NOT NULL AUTO_INCREMENT, `post_id` INT NOT NULL, `etiquetas_id` INT NOT NULL, PRIMARY KEY (`id`));``
+
+``> ALTER TABLE `blogpost`.`posts_etiquetas` ADD INDEX `postsetiquetas_post_idx` (`post_id` ASC);``
+``> ALTER TABLE `blogpost`.`posts_etiquetas` ADD CONSTRAINT `postsetiquetas_posts` FOREIGN KEY (`post_id`) REFERENCES `blogpost`.`posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
+
+``> ALTER TABLE `blogpost`.`posts_etiquetas` ADD INDEX `postsetiquetas_etiquetas_idx` (`etiqueta_id` ASC);``
+``> ALTER TABLE `blogpost`.`posts_etiquetas` ADD CONSTRAINT `postsetiquetas_etiquetas` FOREIGN KEY (`etiqueta_id`) REFERENCES `blogpost`.`etiquetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
