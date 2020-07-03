@@ -565,7 +565,7 @@ Alrededor de las consultas a las bases de datos se han creado varias especialida
 
 Los queries son la forma en la que estructuramos las preguntas que se harán a la base de datos. Transforma preguntas en sintaxis.
 
-El query tiene básicamente 2 partes: **SELECT** y **FROM** y puede aparecer una tercera como **WHERE**.
+El query tiene básicamente 2 partes: [**SELECT**](https://github.com/diegoufp/Bases-de-Datos#select-1 "SELECT") y [**FROM**](https://github.com/diegoufp/Bases-de-Datos#from "FROM") y puede aparecer una tercera como [**WHERE**](https://github.com/diegoufp/Bases-de-Datos#where "WHERE").
 
 La estrellita o asterisco (*) quiere decir que vamos a seleccionar todo sin filtrar campos.
 
