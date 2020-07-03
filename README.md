@@ -251,25 +251,27 @@ En este curso usaremos [MySQL](https://dev.mysql.com/downloads/ "MySQL") porque 
 - Root es el usuario principal que tendrá todos los permisos y por lo tanto en ambientes de producción hay que tener mucho cuidado al configurarlo.
 
 ## Usar mysql en KALI LINUX 2020.b
+```
+$ sudo apt-get install mariadb-client
 
-$ `sudo apt-get install mariadb-client`
+$ sudo apt-get install mariadb-server
 
-$ `sudo apt-get install mariadb-server`
+$ sudo service mysql start
 
-$ `sudo service mysql start`
-
-$ `sudo mariadb`
+$ sudo mariadb
+```
 
 #### Ya en MariaDB
 
-$ MariaDB [(none)]> `show databases`
+```
+$ MariaDB [(none)]> show databases
 
-$ MariaDB [(none)]> `use mysql`
+$ MariaDB [(none)]> use mysql
 
-$ MariaDB [(mysql)]> `show tables`
+$ MariaDB [(mysql)]> show tables
 
-$ MariaDB [(mysql)]>`exit`
-
+$ MariaDB [(mysql)]> exit
+```
 
 
 ## Servicios administrados
@@ -305,65 +307,93 @@ Israel Vázquez Morales
 ### CREATE
 
 - **Creas base de datos**:
-`CREATE DATABASE test_db;`
+```
+CREATE DATABASE test_db;
+```
 
 - **Usar base de datos**:
-`USE DATABASE test_db;`
+```
+USE DATABASE test_db;
+```
 
 - **Creas tabla**:
-`CREATE TABLE people (person_id int, last_name varchar(255), first_name varchar(255), address varchar(255), city varchar(255));`
+```
+CREATE TABLE people (person_id int, last_name varchar(255), first_name varchar(255), address varchar(255), city varchar(255));
+```
 
 
 #### Crear base de datos de ejemplo
+```
+$ sudo mariadb
 
-`$ sudo mariadb`
+> use mysql
 
-`> use mysql`
+> CREATE SCHEMA `blogpost` DEFAULT CHARACTER SET utf8;
 
-``> CREATE SCHEMA `blogpost` DEFAULT CHARACTER SET utf8;``
+> USE blogpost;
 
-`> USE blogpost;`
+> CREATE TABLE `blogpost`.`people` (`person_id` INT NOT NULL AUTO_INCREMENT, `last_name` VARCHAR(255) NULL, `first_name` VARCHAR(255) NULL, `address` VARCHAR(255) NULL, `city` VARCHAR(255) NULL, PRIMARY KEY (`person_id`));
 
-``> CREATE TABLE `blogpost`.`people` (`person_id` INT NOT NULL AUTO_INCREMENT, `last_name` VARCHAR(255) NULL, `first_name` VARCHAR(255) NULL, `address` VARCHAR(255) NULL, `city` VARCHAR(255) NULL, PRIMARY KEY (`person_id`));``
+> SHOW TABLES FROM blogpost;
 
-`> SHOW TABLES FROM blogpost;`
-
-`> SELECT * FROM people;`
-
+> SELECT * FROM people;
+```
 
 
 ###  CREATE VIEW y DDL ALTER
 
 **VIEW** sirve para representar los datos que necesitamos, hacer un consulta especifica y se identifica las vistas con una v al principio del nombre.
 
-- Vista: `CREATE VIEW v_brasil_customers AS`
-            `SELECT customer_name, contact_name`
-            `FROM customers`
-            `WHETE country = "Brasil";`
+- Vista: 
+```
+CREATE VIEW v_brasil_customers AS
+SELECT customer_name, contact_name
+FROM customers
+WHETE country = "Brasil";
+```
 
 **ALTER** ES el comando que nos va a permitir modificar.
 
-- Agregar columna:  `ALTER TABLE people`
-                    `ADD date_of_birth date;`
+- Agregar columna:  
+```
+ALTER TABLE people
+ADD date_of_birth date;
+```
 
-- Alterar columna:  `ALTER TABLE people`
-                    `ALTER COLUMN date_of_birth year;`
+- Alterar columna:  
+```
+ALTER TABLE people
+ALTER COLUMN date_of_birth year;
+```
 
-- Borrar columna:   `ALTER TABLE people`
-                    `DROP COLUMN date_of_birth;`
+- Borrar columna:
+```
+ALTER TABLE people
+DROP COLUMN date_of_birth;
+```
 
 
 #### Usar comandos en un ejemplo
 
-`> USE blogpost;`
+```
+> USE blogpost;
+```
 
-``> CREATE OR REPLACE VIEW `v_blogpost_people` AS SELECT * FORM blogpost.people;``
+```
+> CREATE OR REPLACE VIEW `v_blogpost_people` AS SELECT * FORM blogpost.people;
+```
 
-``> ALTER TABLE `blogpost`.`people` ADD COLUMN `date_of_birth` DATETIME NULL AFTER `city`;``
+```
+> ALTER TABLE `blogpost`.`people` ADD COLUMN `date_of_birth` DATETIME NULL AFTER `city`;
+```
 
-``> ALTER TABLE `blogpost`.`people` CHANGE COLUMN `date_of_birth` `date_of_birth` VARCHAR(30) NULL DEFAULT NULL;``
+```
+> ALTER TABLE `blogpost`.`people` CHANGE COLUMN `date_of_birth` `date_of_birth` VARCHAR(30) NULL DEFAULT NULL;
+```
 
-``> ALTER TABLE `blogpost`.`people` DROP COLUMN `date_of_birth`;``
+```
+> ALTER TABLE `blogpost`.`people` DROP COLUMN `date_of_birth`;
+```
 
 
 
@@ -371,19 +401,33 @@ Israel Vázquez Morales
 
 Está puede ser la sentencia ¡más peligrosa!, sobre todo cuando somos principiantes. Básicamente borra o desaparece de nuestra base de datos algún elemento.
 
-- Borrar tabla: `DROP TABLE people;`
+- Borrar tabla: 
+```
+DROP TABLE people;
+```
 
-- Borrar base de datos: `DROP DATABASE test_db;`
+- Borrar base de datos: 
+```
+DROP DATABASE test_db;
+```
 
 #### Usar comandos en un ejemplo
 
-`> USE blogpost;`
+```
+> USE blogpost;
+```
 
-``> DROP TABLE `blogpost`.`people`;``
+```
+> DROP TABLE `blogpost`.`people`;
+```
 
-``> SELECT*FROM blogpost.people;``
+```
+> SELECT*FROM blogpost.people;
+```
 
-``> DROP DATABASE `blogpost`;``
+```
+> DROP DATABASE `blogpost`;
+```
 
 
 
@@ -401,16 +445,22 @@ Está puede ser la sentencia ¡más peligrosa!, sobre todo cuando somos principi
 Inserta renglones por cada sentencia "Insert" que hagamos.
 Normalme el valor por defecto es NULL.
 
-`INSERT INTO people (last_name, first_name, address, city)`
-`VALUES ('Hernandez', 'Laura', 'Calle 21', 'Monterrey');`
+```
+INSERT INTO people (last_name, first_name, address, city)
+VALUES ('Hernandez', 'Laura', 'Calle 21', 'Monterrey');
+```
 
 Hay que tener mucho cuidado a la hora de mantener el orden tanto en la parte de los campos como en el de VALUES.
 
 #### Usar INSERT en un ejemplo
 
-``> INSERT INTO people(last_name, first_name, address, city) VALUES('Hernandez', 'Laura', 'Calle 21', 'Monterrey');``
+```
+> INSERT INTO people(last_name, first_name, address, city) VALUES('Hernandez', 'Laura', 'Calle 21', 'Monterrey');
+```
 
-``> SELECT * FROM people;``
+```
+> SELECT * FROM people;
+```
 
 ### UPDATE
 
@@ -418,28 +468,40 @@ Modificar los datos que ya tenemos, update no va a insertar los datos si no exis
 
 - Lo que va hacer es tomar la persona donde tenga el id numero 1 y le va a cambiar el apellido a Chavez y le va a cambiar la ciudad a Merida: 
 
-``UPDATE people``
-``SET last_name = 'Chavez', city = 'Merida'``
-``WHERE person_id = 1;``
+```
+UPDATE people
+SET last_name = 'Chavez', city = 'Merida'
+WHERE person_id = 1;
+```
 
 - En este le pondremos el primer nombre Juan y eso se va hacer en todos renglones donde la ciudad sea Merida: 
 
-``UPDATE people``
-``SET first_name = 'Juan'``
-``WHERE city = 'Merida';``
+```
+UPDATE people
+SET first_name = 'Juan'
+WHERE city = 'Merida';
+```
 
 - Se esta haciendo un update inseguro, es decir que se esta haciendo un update masivo:
 
-``UPDATE people``
-``SET first_name = 'Juan';``
+```
+UPDATE people
+SET first_name = 'Juan';
+```
 
 #### Usar UPDATE en un ejemplo
 
-``> UPDATE people SET last_name = 'Chavez', city = 'Merida' WHERE person_id = 1;``
+```
+> UPDATE people SET last_name = 'Chavez', city = 'Merida' WHERE person_id = 1;
+```
 
-``> UPDATE people SET first_name = 'Juan' WHERE city = 'Merida';``
+```
+> UPDATE people SET first_name = 'Juan' WHERE city = 'Merida';
+```
 
-``> SELECT * FROM people;``
+```
+> SELECT * FROM people;
+```
 
 ### DELETE
 
@@ -447,18 +509,29 @@ Esta es una sentencia DML que puede borrar el contenido de una tabla
 
 - Va aborrar el renglon con el person_id 1:
 
-``DELETE FROM people``
-``WHERE person_id = 1;``
+```
+DELETE FROM people
+```
+
+```
+WHERE person_id = 1;
+```
 
 - Va a borrar toda la tabla:
 
-``DELETE FROM people;``
+```
+DELETE FROM people;
+```
 
 #### Usar DELETE en un ejemplo
 
-``> DELETE FROM people WHERE person_id = 1;``
+```
+> DELETE FROM people WHERE person_id = 1;
+```
 
-``> SELECT * FROM people;``
+```
+> SELECT * FROM people;
+```
 
 ### SELECT
 
@@ -466,19 +539,27 @@ SELECT lo que hace es traernos informacionde la base de datos.
 
 - Que campos quieres ver:
 
-``SELECT first_name, last_name``
+```
+SELECT first_name, last_name
+```
 
 - De donde quieres obtener esos campos:
 
-``FROM people``
+```
+FROM people
+```
 
 - Para no tener que ver todo los datos especificas mas con la sentencia where:
 
-``WHERE person_id = 2;``
+```
+WHERE person_id = 2;
+```
 
 #### Usar SELECT en un ejemplo
 
-``SELECT first_name, last_name FROM people WHERE person_id = 2; ``
+```
+SELECT first_name, last_name FROM people WHERE person_id = 2;
+```
 
 
 
@@ -501,21 +582,31 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 
 - Generalmente en los nombres de bases de datos se evita usar eñes o acentos para evitar problemas en los manejadores de las bases de datos.
 
-``> CREATE SCHEMA `blogpost`;``
+```
+> CREATE SCHEMA `blogpost`;
+```
 
-``> USE blogpost;``
+```
+> USE blogpost;
+```
 
 #### Entidad categorias:
 
-``> CREATE TABLE `blogpost`.`categorias` (`id` INT NOT NULL AUTO_INCREMENT, `nombres_categoria` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));``
+```
+> CREATE TABLE `blogpost`.`categorias` (`id` INT NOT NULL AUTO_INCREMENT, `nombres_categoria` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));
+```
 
 #### Entidad etiquetas:
 
-``> CREATE TABLE `blogpost`.`etiquetas` (`id` INT NOT NULL AUTO_INCREMENT, `nombre_etiquetas` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));``
+```
+> CREATE TABLE `blogpost`.`etiquetas` (`id` INT NOT NULL AUTO_INCREMENT, `nombre_etiquetas` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));
+```
 
 #### Entidad usuarios:
 
-``> CREATE TABLE `blogpost`.`usuarios` (`id` INT NOT NULL AUTO_INCREMENT, `login` VARCHAR(30) NOT NULL, `password` VARCHAR(32) NOT NULL, `nickname` VARCHAR(40) NOT NULL, `email` VARCHAR(40) NOT NULL, PRIMARY KEY (`id`), UNIQUE INDEX `email_UNIQUE`(`email` ASC));``
+```
+> CREATE TABLE `blogpost`.`usuarios` (`id` INT NOT NULL AUTO_INCREMENT, `login` VARCHAR(30) NOT NULL, `password` VARCHAR(32) NOT NULL, `nickname` VARCHAR(40) NOT NULL, `email` VARCHAR(40) NOT NULL, PRIMARY KEY (`id`), UNIQUE INDEX `email_UNIQUE`(`email` ASC));
+```
 
 ### Tablas dependientes
 
@@ -523,23 +614,39 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 
 #### Entidad posts:
 
-``> CREATE TABLE `blogpost`.`posts` (`id` INT NOT NULL AUTO_INCREMENT, `titulo` VARCHAR(130) NOT NULL, `fecha_publicacion` TIMESTAMP NULL, `contenido` TEXT NOT NULL, `estatus` CHAR(8) NULL DEFAULT 'activo', `usuario_id` INT NOT NULL, `categoria_id` INT NOT NULL, PRIMARY KEY (`id`));``
+```
+> CREATE TABLE `blogpost`.`posts` (`id` INT NOT NULL AUTO_INCREMENT, `titulo` VARCHAR(130) NOT NULL, `fecha_publicacion` TIMESTAMP NULL, `contenido` TEXT NOT NULL, `estatus` CHAR(8) NULL DEFAULT 'activo', `usuario_id` INT NOT NULL, `categoria_id` INT NOT NULL, PRIMARY KEY (`id`));
+```
 
-``> ALTER TABLE `blogpost`.`posts` ADD INDEX `posts_usuarios_idx` (`usuario_id` ASC);``
-``> ALTER TABLE `blogpost`.`posts` ADD CONSTRAINT `posts_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `blogpost`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;``
+```
+> ALTER TABLE `blogpost`.`posts` ADD INDEX `posts_usuarios_idx` (`usuario_id` ASC);
 
-``> ALTER TABLE `blogpost`.`posts` ADD INDEX `posts_categorias_idx` (`categoria_id` ASC);``
-``> ALTER TABLE `blogpost`.`posts` ADD CONSTRAINT `posts_categorias` FOREIGN KEY (`categoria_id`) REFERENCES `blogpost`.`categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
+> ALTER TABLE `blogpost`.`posts` ADD CONSTRAINT `posts_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `blogpost`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+```
+
+```
+> ALTER TABLE `blogpost`.`posts` ADD INDEX `posts_categorias_idx` (`categoria_id` ASC);
+
+> ALTER TABLE `blogpost`.`posts` ADD CONSTRAINT `posts_categorias` FOREIGN KEY (`categoria_id`) REFERENCES `blogpost`.`categorias` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+```
 
 #### Entidad comentarios
 
-``> CREATE TABLE `blogpost`.`comentarios` (`id` INT NOT NULL AUTO_INCREMENT, `cuerpo_comentario` TEXT NOT NULL, `usuario_id` INT NOT NULL, `post_id` INT NOT NULL, PRIMARY KEY (`id`));``
+```
+> CREATE TABLE `blogpost`.`comentarios` (`id` INT NOT NULL AUTO_INCREMENT, `cuerpo_comentario` TEXT NOT NULL, `usuario_id` INT NOT NULL, `post_id` INT NOT NULL, PRIMARY KEY (`id`));
+```
 
-``> ALTER TABLE `blogpost`.`comentarios` ADD INDEX `comentarios_usuario_idx` (`usuario_id` ASC);``
-``> ALTER TABLE `blogpost`.`comentarios` ADD CONSTRAINT `comentarios_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `blogpost`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
+```
+> ALTER TABLE `blogpost`.`comentarios` ADD INDEX `comentarios_usuario_idx` (`usuario_id` ASC);
 
-``> ALTER TABLE `blogpost`.`comentarios` ADD INDEX `comentarios_post_idx` (`post_id` ASC);``
-``> ALTER TABLE `blogpost`.`comentarios` ADD CONSTRAINT `comentarios_posts` FOREIGN KEY (`post_id`) REFERENCES `blogpost`.`posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
+> ALTER TABLE `blogpost`.`comentarios` ADD CONSTRAINT `comentarios_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `blogpost`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+```
+
+```
+> ALTER TABLE `blogpost`.`comentarios` ADD INDEX `comentarios_post_idx` (`post_id` ASC);
+
+> ALTER TABLE `blogpost`.`comentarios` ADD CONSTRAINT `comentarios_posts` FOREIGN KEY (`post_id`) REFERENCES `blogpost`.`posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+```
 
 ### Tablas transitivas
 
@@ -548,13 +655,21 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 
 #### Tabla transitiva
 
-``> CREATE TABLE `blogpost`.`posts_etiquetas` (`id` INT NOT NULL AUTO_INCREMENT, `post_id` INT NOT NULL, `etiquetas_id` INT NOT NULL, PRIMARY KEY (`id`));``
+```
+> CREATE TABLE `blogpost`.`posts_etiquetas` (`id` INT NOT NULL AUTO_INCREMENT, `post_id` INT NOT NULL, `etiquetas_id` INT NOT NULL, PRIMARY KEY (`id`));
+```
 
-``> ALTER TABLE `blogpost`.`posts_etiquetas` ADD INDEX `postsetiquetas_post_idx` (`post_id` ASC);``
-``> ALTER TABLE `blogpost`.`posts_etiquetas` ADD CONSTRAINT `postsetiquetas_posts` FOREIGN KEY (`post_id`) REFERENCES `blogpost`.`posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
+```
+> ALTER TABLE `blogpost`.`posts_etiquetas` ADD INDEX `postsetiquetas_post_idx` (`post_id` ASC);
 
-``> ALTER TABLE `blogpost`.`posts_etiquetas` ADD INDEX `postsetiquetas_etiquetas_idx` (`etiqueta_id` ASC);``
-``> ALTER TABLE `blogpost`.`posts_etiquetas` ADD CONSTRAINT `postsetiquetas_etiquetas` FOREIGN KEY (`etiqueta_id`) REFERENCES `blogpost`.`etiquetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;``
+> ALTER TABLE `blogpost`.`posts_etiquetas` ADD CONSTRAINT `postsetiquetas_posts` FOREIGN KEY (`post_id`) REFERENCES `blogpost`.`posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+```
+
+```
+> ALTER TABLE `blogpost`.`posts_etiquetas` ADD INDEX `postsetiquetas_etiquetas_idx` (`etiqueta_id` ASC);
+
+> ALTER TABLE `blogpost`.`posts_etiquetas` ADD CONSTRAINT `postsetiquetas_etiquetas` FOREIGN KEY (`etiqueta_id`) REFERENCES `blogpost`.`etiquetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+```
 
 ## ¿Por qué las consultas son tan importantes?
 
@@ -572,22 +687,34 @@ La estrellita o asterisco (*) quiere decir que vamos a seleccionar todo sin filt
 ### La estructura de un Query
 
 Traer los datos que quieremos mostrar: 
-``SELECT city, count(*) AS total`` 
+```
+SELECT city, count(*) AS total
+``` 
 
 De donde voy a tomar los datos:
-``FROM people``
+```
+FROM people
+```
 
 Los filtros de los datos que quieres mostrar:
-``WHERE active = true`` 
+```
+WHERE active = true
+``` 
 
 Los rubros por los que me interesa agrupar mi información:
-``GROUP BY city`` 
+```
+GROUP BY city
+``` 
 
 El orden en que quiero presentar mi información:
-``ORDER BY total DESC``
+```
+ORDER BY total DESC
+```
 
 Los filtros que quiero que mis datos agrupados:
-``HAVING total >= 2;`` 
+```
+HAVING total >= 2;
+``` 
 
 ### Ejemplos de Querys
 
@@ -595,75 +722,93 @@ Para los ejemplos usaremos los datos del [Expetimento de un Blogpost](https://gi
 
 - ¿Cuántos tags tienen cada post?
 
-``SELECT  posts.titulo, COUNT(*) AS num_etiquetas``
-``FROM    posts``
-    ``INNER JOIN posts_etiquetas ON posts.id = posts_etiquetas.post_id``
-   `` INNER JOIN etiquetas ON etiquetas.id = posts_etiquetas.etiqueta_id``
-``GROUP BY posts.id;``
+```
+SELECT  posts.titulo, COUNT(*) AS num_etiquetas
+FROM    posts
+    INNER JOIN posts_etiquetas ON posts.id = posts_etiquetas.post_id
+    INNER JOIN etiquetas ON etiquetas.id = posts_etiquetas.etiqueta_id
+GROUP BY posts.id;
+```
 
 - ¿Cuál es el tag que mas se repite? 
 
-``SELECT  etiquetas.nombre_etiqueta, COUNT(*) AS ocurrencias``
-``FROM etiquetas``
-    ``INNER JOIN posts_etiquetas ON etiquetas.id = posts_etiquetas.etiqueta_id``
-``GROUP BY etiquetas.id``
-``ORDER BY ocurrencias DESC;``
+```
+SELECT  etiquetas.nombre_etiqueta, COUNT(*) AS ocurrencias
+FROM etiquetas
+    INNER JOIN posts_etiquetas ON etiquetas.id = posts_etiquetas.etiqueta_id
+GROUP BY etiquetas.id
+ORDER BY ocurrencias DESC;
+```
 
 - Los tags que tiene un post separados por comas
 
-``SELECT  posts.titulo, GROUP_CONCAT(nombre_etiqueta)``
-``FROM    posts``
-    ``INNER JOIN posts_etiquetas ON posts.id = posts_etiquetas.post_id``
-    ``INNER JOIN etiquetas ON etiquetas.id = posts_etiquetas.etiqueta_id``
-``GROUP BY posts.id;``
+```
+SELECT  posts.titulo, GROUP_CONCAT(nombre_etiqueta)
+FROM    posts
+    INNER JOIN posts_etiquetas ON posts.id = posts_etiquetas.post_id
+    INNER JOIN etiquetas ON etiquetas.id = posts_etiquetas.etiqueta_id
+GROUP BY posts.id;
+```
 
 - ¿Que etiqueta no tiene ningun post asociado?
 
-``SELECT	*``
-``FROM	etiquetas``
-``LEFT JOIN posts_etiquetas onetiquetas.id = posts_etiquetas.etiqueta_id``
-``WHERE	posts_etiquetas.etiqueta_id IS NULL;``
+```
+SELECT	*
+FROM	etiquetas
+LEFT JOIN posts_etiquetas onetiquetas.id = posts_etiquetas.etiqueta_id
+WHERE	posts_etiquetas.etiqueta_id IS NULL;
+```
 
 - Las categorías ordenadas por numero de posts
 
-``SELECT c.nombre_categoria, COUNT(*) AS cant_posts``
-``FROM    categorias AS c``
-    ``INNER JOIN posts AS p on c.id = p.categoria_id``
-``GROUP BY c.id``
-``ORDER BY cant_posts DESC;``
+```
+SELECT c.nombre_categoria, COUNT(*) AS cant_posts
+FROM    categorias AS c
+    INNER JOIN posts AS p on c.id = p.categoria_id
+GROUP BY c.id
+ORDER BY cant_posts DESC;
+```
 
 - ¿Cuál es la categoría que tiene mas posts?
 
-``SELECT c.nombre_categoria, COUNT(*) AS cant_posts``
-``FROM    categorias AS c``
-   `` INNER JOIN posts AS p on c.id = p.categoria_id``
-``GROUP BY c.id``
-``ORDER BY cant_posts DESC``
-``LIMIT 1;``
+```
+SELECT c.nombre_categoria, COUNT(*) AS cant_posts
+FROM    categorias AS c
+   `` INNER JOIN posts AS p on c.id = p.categoria_id
+GROUP BY c.id
+ORDER BY cant_posts DESC
+LIMIT 1;
+```
 
 - ¿Que usuario ha contribuido con mas post?
 
-``SELECT u.nickname, COUNT(*) AS cant_posts``
-``FROM    usuarios AS u``
-    ``INNER JOIN posts AS p on u.id = p.usuario_id``
-``GROUP BY u.id``
-``ORDER BY cant_posts DESC``
-``LIMIT 1;``
+```
+SELECT u.nickname, COUNT(*) AS cant_posts
+FROM    usuarios AS u
+    INNER JOIN posts AS p on u.id = p.usuario_id
+GROUP BY u.id
+ORDER BY cant_posts DESC
+LIMIT 1;
+```
 
 - ¿De que categorías escribe cada usuario?
 
-``SELECT u.nickname, COUNT(*) AS cant_posts,  GROUP_CONCAT(nombre_categoria)``
-``FROM    usuarios AS u``
-    ``INNER JOIN posts AS p ON u.id = p.usuario_id``
-    ``INNER JOIN categorias AS c ON c.id = p.categoria_id``
-``GROUP BY u.id;``
+```
+SELECT u.nickname, COUNT(*) AS cant_posts,  GROUP_CONCAT(nombre_categoria)
+FROM    usuarios AS u
+    INNER JOIN posts AS p ON u.id = p.usuario_id
+    INNER JOIN categorias AS c ON c.id = p.categoria_id
+GROUP BY u.id;
+```
 
 - ¿Que usuario no tiene ningun post asociado?
 
-``SELECT	*``
-``FROM	usuarios ``
-``LEFT JOIN posts on usuarios.id = posts.usuario_id``
-``WHERE	posts.usuario_id IS NULL;``
+```
+SELECT	*
+FROM	usuarios
+LEFT JOIN posts on usuarios.id = posts.usuario_id
+WHERE	posts.usuario_id IS NULL;
+```
 
 ## SELECT
 
@@ -671,11 +816,15 @@ Para los ejemplos usaremos los datos del [Expetimento de un Blogpost](https://gi
 
 - El nombre de las columnas o campos que estamos consultando puede ser cambiado utilizando **AS** después del nombre del campo y poniendo el nuevo que queremos tener:
 
-``SELECT titulo AS encabezado FROM posts;``
+```
+SELECT titulo AS encabezado FROM posts;
+```
 
 - Existe una función de SELECT para poder contar la cantidad de registros. Esa información (un número) será el resultado del query:
 
-``SELECT COUNT(*) FROM posts;``
+```
+SELECT COUNT(*) FROM posts;
+```
 
 ## FROM
 
@@ -881,7 +1030,7 @@ La sentencia **ORDER BY** tiene que ver con el ordenamiento de los datos dependi
 
 **HAVING** tiene una similitud muy grande con **WHERE**, sin embargo el uso de ellos depende del orden. Cuando se quiere seleccionar tuplas agrupadas únicamente se puede hacer con **HAVING**.
 
-- Ejemplos de ORDER BY:
+### Ejemplos de ORDER BY:
 
 ```
 SELECT	*
@@ -921,7 +1070,7 @@ GROUP BY estatus, post_month
 ORDER BY post_month;
 ```
 
-- Ejemplos de HAVING:
+### Ejemplos de HAVING:
 
 ```
 SELECT	MONTHNAME(fecha_publicacion) AS post_month, estatus, COUNT(*) AS post_quantity
