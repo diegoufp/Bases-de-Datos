@@ -637,13 +637,13 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 ```
 
 ```
-> ALTER TABLE `blogpost`.`comentarios` ADD INDEX `comentarios_usuario_idx` (`usuario_id` ASC);
+> ALTER TABLE `blogpost`.`comentarios` ADD INDEX `comentarios_usuarios_idx` (`usuario_id` ASC);
 
-> ALTER TABLE `blogpost`.`comentarios` ADD CONSTRAINT `comentarios_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `blogpost`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+> ALTER TABLE `blogpost`.`comentarios` ADD CONSTRAINT `comentarios_usuarios` FOREIGN KEY (`usuario_id`) REFERENCES `blogpost`.`usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ```
 
 ```
-> ALTER TABLE `blogpost`.`comentarios` ADD INDEX `comentarios_post_idx` (`post_id` ASC);
+> ALTER TABLE `blogpost`.`comentarios` ADD INDEX `comentarios_posts_idx` (`post_id` ASC);
 
 > ALTER TABLE `blogpost`.`comentarios` ADD CONSTRAINT `comentarios_posts` FOREIGN KEY (`post_id`) REFERENCES `blogpost`.`posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ```
@@ -656,11 +656,11 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 #### Tabla transitiva
 
 ```
-> CREATE TABLE `blogpost`.`posts_etiquetas` (`id` INT NOT NULL AUTO_INCREMENT, `post_id` INT NOT NULL, `etiquetas_id` INT NOT NULL, PRIMARY KEY (`id`));
+> CREATE TABLE `blogpost`.`posts_etiquetas` (`id` INT NOT NULL AUTO_INCREMENT, `post_id` INT NOT NULL, `etiqueta_id` INT NOT NULL, PRIMARY KEY (`id`));
 ```
 
 ```
-> ALTER TABLE `blogpost`.`posts_etiquetas` ADD INDEX `postsetiquetas_post_idx` (`post_id` ASC);
+> ALTER TABLE `blogpost`.`posts_etiquetas` ADD INDEX `postsetiquetas_posts_idx` (`post_id` ASC);
 
 > ALTER TABLE `blogpost`.`posts_etiquetas` ADD CONSTRAINT `postsetiquetas_posts` FOREIGN KEY (`post_id`) REFERENCES `blogpost`.`posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ```
