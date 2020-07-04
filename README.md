@@ -686,32 +686,32 @@ La estrellita o asterisco (*) quiere decir que vamos a seleccionar todo sin filt
 
 ### La estructura de un Query
 
-Traer los datos que quieremos mostrar: 
+Traer los datos que quieremos mostrar: [**SELECT**](https://github.com/diegoufp/Bases-de-Datos#select-1 "SELECT") 
 ```
 SELECT city, count(*) AS total
 ``` 
 
-De donde voy a tomar los datos:
+De donde voy a tomar los datos: [**FROM**](https://github.com/diegoufp/Bases-de-Datos#from "FROM")
 ```
 FROM people
 ```
 
-Los filtros de los datos que quieres mostrar:
+Los filtros de los datos que quieres mostrar: [**WHERE**](https://github.com/diegoufp/Bases-de-Datos#where "WHERE")
 ```
 WHERE active = true
 ``` 
 
-Los rubros por los que me interesa agrupar mi información:
+Los rubros por los que me interesa agrupar mi información: [**GROUP BY**](https://github.com/diegoufp/Bases-de-Datos#group-by "GROUP BY")
 ```
 GROUP BY city
 ``` 
 
-El orden en que quiero presentar mi información:
+El orden en que quiero presentar mi información: [**ORDER BY**](https://github.com/diegoufp/Bases-de-Datos#order-by-y-having "ORDER BY")
 ```
 ORDER BY total DESC
 ```
 
-Los filtros que quiero que mis datos agrupados:
+Los filtros que quiero que mis datos agrupados: [**HAVING**](https://github.com/diegoufp/Bases-de-Datos#order-by-y-having "HAVING")
 ```
 HAVING total >= 2;
 ``` 
