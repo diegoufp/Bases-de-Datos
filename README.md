@@ -671,7 +671,6 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 > ALTER TABLE `blogpost`.`posts_etiquetas` ADD CONSTRAINT `postsetiquetas_etiquetas` FOREIGN KEY (`etiqueta_id`) REFERENCES `blogpost`.`etiquetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ```
 
-#### Consultas de blogpost
 
 ## ¿Por qué las consultas son tan importantes?
 
@@ -1140,10 +1139,23 @@ Respecto a las bases de datos no relacionales, no existe un solo tipo aunque se 
 
 - **Clave - valor**: Son ideales para almacenar y extraer datos con una clave única. Manejan los diccionarios de manera excepcional. Se basan en algoritmos de hash o hashmap. Ejemplos: **DynamoDB**, **Cassandra**.
 
-- **Basadas en documentos**: Son una implementación de clave valor que varía en la forma semiestructurada en que se trata la información. Ideal para almacenar datos JSON y XML.  Guarda la forma actual de una aplicación, no son buenas para hacer consulta complejas. Son las más utilizadas despues de los RDBMS. Ejemplos: **MongoDB**, **Firestore**.
+- **Basadas en documentos**: Son una implementación de clave valor que varía en la forma semiestructurada en que se trata la información. Ideal para almacenar datos JSON y XML.  Guarda la forma actual de una aplicación, no son buenas para hacer consulta complejas. Son las más utilizadas despues de los RDBMS. Ejemplos: **MongoDB**, [**Firestore**](https://github.com/diegoufp/Bases-de-Datos#firestore "Firestore").
 
 - **Basadas en grafos**: Basadas en teoría de grafos, sirven para entidades que se encuentran interconectadas por múltiples relaciones. Ideales para almacenar relaciones complejas. Se usan en el mundo de la inteligencia artificial, para formar redes neuronales. Ejemplos: **neo4j**, **TITAN**.
 
 - **En memoria**: Pueden ser de estructura variada, pero su ventaja radica en la velocidad, ya que al vivir en memoria la extracción de datos es casi inmediata. Su desventaja es que son limitadas y hay que guardar cosas en disco. Otra desventaja es que son volatiles (si se reinicia, hay que indexar, volver a traer la información del disco). Ejemplos: **Memcached**, **Redis**.
 
 - **Optimizadas para búsquedas**: Pueden ser de diversas estructuras, su ventaja radica en que se pueden hacer queries y búsquedas complejas de manera sencilla. Son utilizadas en Business Inteligent y Machine learning. Ejemplos: **BigQuery**, **Elasticsearch**.
+
+
+## Firestore
+
+[**Firebase**](https://es.wikipedia.org/wiki/Firebase "Firebase") (Firestore). Es una plataforma muy utilizada para el desarrollo de aplicaciones web y aplicaciones móviles. Como usa un conjunto de herramientas multiplataforma es compatible con grandes plataformas, como IOS, Android, aplicaciones web, Unity y C++. Es muy recomendable para desarrollos.
+
+### Jerarquía de datos
+
+- **Base de Datos**: Contiene toda la información que se quiere guardar.
+
+- **Colección**: Es igual a las tablas en las bases de datos relacionales. Son objetos que agrupan (Documentos) la información que se desea guardar.
+
+- **Documento**: Es la información que se quiere guardar. Se guarda en un formato muy parecido al formato JSON (es un lenguaje que se utiliza para comunicarse con diferentes lenguajes o aplicaciones). Los documentos dentro de ellos contienen datos.
