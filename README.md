@@ -4,9 +4,9 @@
 
 ## Tipos de bases de datos
 
-- Relacionales : En la industria hay varias compañias dedicadas a ser manejadoras de bases de datos relacionales como [SQL Server](https://www.microsoft.com/es-mx/sql-server/sql-server-downloads "SQL Server"), [Oracle](https://www.oracle.com/es/index.html "Oracle"), [MariaDB](https://mariadb.com/?_ga=2.123419019.1633320114.1593138543-55489294.1593138543&_gac=1.119303547.1593138543.CjwKCAjwltH3BRB6EiwAhj0IUP-B0C8Tw8ZyzSJPtz3kG2Y8XXOGdPRTF3R1GKzm-eS73XeOmvuKMxoCa5EQAvD_BwE "MariaDB"), entre otras.
+- [Relacionales](https://github.com/diegoufp/Bases-de-Datos#historia-de-las-rdb-bases-de-datos-relacionales "Relacionales") : En la industria hay varias compañias dedicadas a ser manejadoras de bases de datos relacionales como [SQL Server](https://www.microsoft.com/es-mx/sql-server/sql-server-downloads "SQL Server"), [Oracle](https://www.oracle.com/es/index.html "Oracle"), [MariaDB](https://mariadb.com/?_ga=2.123419019.1633320114.1593138543-55489294.1593138543&_gac=1.119303547.1593138543.CjwKCAjwltH3BRB6EiwAhj0IUP-B0C8Tw8ZyzSJPtz3kG2Y8XXOGdPRTF3R1GKzm-eS73XeOmvuKMxoCa5EQAvD_BwE "MariaDB"), entre otras.
 
-- No relacionales: Todavía están avanzando y existen ejemplos muy distintos como [cassandra](https://cassandra.apache.org/ "cassandra"), [elasticsearch](https://www.elastic.co/es/ "elasticsearch"), [neo4j](https://neo4j.com/ "neo4j"), [MongoDB](https://www.mongodb.com/es "MongoDB"), entre otras.
+- [No relacionales](https://github.com/diegoufp/Bases-de-Datos#bases-de-datos-no-relacionales "No relacionales"): Todavía están avanzando y existen ejemplos muy distintos como [cassandra](https://cassandra.apache.org/ "cassandra"), [elasticsearch](https://www.elastic.co/es/ "elasticsearch"), [neo4j](https://neo4j.com/ "neo4j"), [MongoDB](https://www.mongodb.com/es "MongoDB"), entre otras.
 
 
 ##### Servicios:
@@ -671,6 +671,8 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 > ALTER TABLE `blogpost`.`posts_etiquetas` ADD CONSTRAINT `postsetiquetas_etiquetas` FOREIGN KEY (`etiqueta_id`) REFERENCES `blogpost`.`etiquetas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 ```
 
+#### Consultas de blogpost
+
 ## ¿Por qué las consultas son tan importantes?
 
 Las consultas o queries a una base de datos son una parte fundamental ya que esto podría salvar un negocio o empresa.
@@ -1127,3 +1129,21 @@ WHERE fecha_publicacion = (
 	FROM posts
 );
 ```
+
+
+## Bases de datos no relacionales
+
+Respecto a las bases de datos no relacionales, no existe un solo tipo aunque se engloben en una sola categoría.
+
+### Tipos de bases de datos no relacionales:
+
+
+- **Clave - valor**: Son ideales para almacenar y extraer datos con una clave única. Manejan los diccionarios de manera excepcional. Se basan en algoritmos de hash o hashmap. Ejemplos: **DynamoDB**, **Cassandra**.
+
+- **Basadas en documentos**: Son una implementación de clave valor que varía en la forma semiestructurada en que se trata la información. Ideal para almacenar datos JSON y XML.  Guarda la forma actual de una aplicación, no son buenas para hacer consulta complejas. Son las más utilizadas despues de los RDBMS. Ejemplos: **MongoDB**, **Firestore**.
+
+- **Basadas en grafos**: Basadas en teoría de grafos, sirven para entidades que se encuentran interconectadas por múltiples relaciones. Ideales para almacenar relaciones complejas. Se usan en el mundo de la inteligencia artificial, para formar redes neuronales. Ejemplos: **neo4j**, **TITAN**.
+
+- **En memoria**: Pueden ser de estructura variada, pero su ventaja radica en la velocidad, ya que al vivir en memoria la extracción de datos es casi inmediata. Su desventaja es que son limitadas y hay que guardar cosas en disco. Otra desventaja es que son volatiles (si se reinicia, hay que indexar, volver a traer la información del disco). Ejemplos: **Memcached**, **Redis**.
+
+- **Optimizadas para búsquedas**: Pueden ser de diversas estructuras, su ventaja radica en que se pueden hacer queries y búsquedas complejas de manera sencilla. Son utilizadas en Business Inteligent y Machine learning. Ejemplos: **BigQuery**, **Elasticsearch**.
