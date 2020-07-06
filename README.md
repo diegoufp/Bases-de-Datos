@@ -1152,6 +1152,12 @@ Respecto a las bases de datos no relacionales, no existe un solo tipo aunque se 
 
 [**Firebase**](https://es.wikipedia.org/wiki/Firebase "Firebase") (Firestore). Es una plataforma muy utilizada para el desarrollo de aplicaciones web y aplicaciones móviles. Como usa un conjunto de herramientas multiplataforma es compatible con grandes plataformas, como IOS, Android, aplicaciones web, Unity y C++. Es muy recomendable para desarrollos.
 
+El modelo de bases de datos no relacionales es un poco más cercano al mundo real en su comportamiento.
+
+- Las top level collections son las colecciones que se tienen de inmediato o entrada en el proyecto.
+
+- Firebase es un servicio que tiene múltiples opciones y está pensado principalmente para aplicaciones móviles y web.
+
 ### Jerarquía de datos
 
 - **Base de Datos**: Contiene toda la información que se quiere guardar.
@@ -1159,3 +1165,43 @@ Respecto a las bases de datos no relacionales, no existe un solo tipo aunque se 
 - **Colección**: Es igual a las tablas en las bases de datos relacionales. Son objetos que agrupan (Documentos) la información que se desea guardar.
 
 - **Documento**: Es la información que se quiere guardar. Se guarda en un formato muy parecido al formato JSON (es un lenguaje que se utiliza para comunicarse con diferentes lenguajes o aplicaciones). Los documentos dentro de ellos contienen datos.
+
+### Tipos de datos
+
+- **String**: Cualquier tipo de valor alfanumérico
+
+- **Number**: Soporta enteros y flotantes.
+
+- **Boolenan**: Los clásicos valores True y False
+
+- **Map**: Permite agregar un documento dentro de otro.
+
+- **Array**: Permite agregar un conjunto de datos (soporte multi type) sin nombre e identificador.
+
+- **Null**: Indica que no se ha definido un valor.
+
+- **Timestamp**: Permite almacenar fechas (guarda el año, mes, día y hora).
+
+- **Geopoint**: Guarda una localización geográfica (coordenadas latitud-longitud).
+
+- **Reference**: Permite referencia un documento (relaciona dos documentos, no importa su colección).
+
+### Colecciones vs subcolecciones
+
+La particularidad de las top level collections es que existen en el primer nivel de manera intrínseca. Las subcolecciones ya no vivirán al inicio de la base de datos.
+
+Si tienes una entidad separada que vas a referenciar desde muchos lugares es recomendado usar un top level collection. Por el otro lado si se necesita hacer algo intrínseco al documento es aconsejable usar subcolecciones.
+
+Para determinar si tu colección debe ser top level o subcolección no hay una regla escrita en piedra y más bien tiene que ver con el caso de uso en particular y con la experiencia que hayas ganado como desarrollador.
+
+Lo cierto es que no hay una sola forma de estructurar nuestra DB basada en documentos, y por tanto no existe una respuesta correcta, sin embargo a continuación te ofrezco un par de reglas guía que puedes utilizar para transformar tu proyecto que ya trabajaste en bases de datos relacionales en un proyecto no relacional.
+
+#### Regla 1. Piensa en la vista de tu aplicación
+
+La primera pista que te puedo dar es que pienses en un inicio en la manera en que los datos serán extraídos. En el caso de una aplicación, la mejor forma de pensarlo es en términos de las vistas que vas a mostrar a un momento determinado en la aplicación.
+
+Es decir, al armar la estructura en la base de datos que sea un espejo o que al menos contenga todos los datos necesarios para llenar las necesidades que tiene nuestra parte visual en la aplicación.
+
+#### Regla 2. La colección tiene vida propia
+
+Esta regla se refiere a que la excepción a la regla 1 es cuando tenemos un caso en que la “entidad” que tiene necesidad de vivir y modificarse constantemente de manera independiente a las otras colecciones.
