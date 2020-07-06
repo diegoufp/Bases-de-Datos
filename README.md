@@ -593,13 +593,13 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 #### Entidad categorias:
 
 ```
-> CREATE TABLE `blogpost`.`categorias` (`id` INT NOT NULL AUTO_INCREMENT, `nombres_categoria` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));
+> CREATE TABLE `blogpost`.`categorias` (`id` INT NOT NULL AUTO_INCREMENT, `nombre_categoria` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));
 ```
 
 #### Entidad etiquetas:
 
 ```
-> CREATE TABLE `blogpost`.`etiquetas` (`id` INT NOT NULL AUTO_INCREMENT, `nombre_etiquetas` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));
+> CREATE TABLE `blogpost`.`etiquetas` (`id` INT NOT NULL AUTO_INCREMENT, `nombre_etiqueta` VARCHAR(30) NOT NULL, PRIMARY KEY (`id`));
 ```
 
 #### Entidad usuarios:
