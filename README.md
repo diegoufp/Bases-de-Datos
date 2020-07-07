@@ -675,7 +675,7 @@ Nuestro proyecto será un manejador de Blogpost. Es un contexto familiar y nos r
 ## ¿Por qué las consultas son tan importantes?
 
 Las consultas o queries a una base de datos son una parte fundamental ya que esto podría salvar un negocio o empresa.
-Alrededor de las consultas a las bases de datos se han creado varias especialidades como [**ETL**](https://es.wikipedia.org/wiki/Extract,_transform_and_load "ETL") o transformación de datos, [**business intelligence**](https://es.wikipedia.org/wiki/Inteligencia_empresarial "business intelligence") e incluso [**machine learning**](https://es.wikipedia.org/wiki/Aprendizaje_autom%C3%A1tico "machine learning").
+Alrededor de las consultas a las bases de datos se han creado varias especialidades como [**ETL**](https://github.com/diegoufp/Bases-de-Datos#etl "ETL") o transformación de datos, [**business intelligence**](https://github.com/diegoufp/Bases-de-Datos#business-intelligence "business intelligence") e incluso [**machine learning**](https://github.com/diegoufp/Bases-de-Datos#machine-learning "machine learning").
 
 ## Estructura básica de un Query
 
@@ -1205,3 +1205,92 @@ Es decir, al armar la estructura en la base de datos que sea un espejo o que al 
 #### Regla 2. La colección tiene vida propia
 
 Esta regla se refiere a que la excepción a la regla 1 es cuando tenemos un caso en que la “entidad” que tiene necesidad de vivir y modificarse constantemente de manera independiente a las otras colecciones.
+
+## Data Science
+
+Es aplicar todo lo que hemos visto, tecnicas de [ETL](https://github.com/diegoufp/Bases-de-Datos#etl "ETL"), [Data Mining](https://github.com/diegoufp/Bases-de-Datos#data-mining "Data Mining"), [Business Intelligence](https://github.com/diegoufp/Bases-de-Datos#business-intelligence "Business Intelligence"). Aunque esta mas dirigida a personas con background de estadisticas, hoy en dia tambien participan personas con el perfil de Data Engineering. Al hacer Data Science estamos aplicando todo lo visto en los temas anteriores, no solo a nivel tecnico sino que desarrollamos la experiencia y conocimientos sobre las distintas tecnologias, en que parte del desarrollo de nuestro proyecto tenemos que utilizarlas, etc. Con lo cual el Data Science juega el papel de manager dentro de un equipo de profesionales de datos.
+
+## Big Data
+
+**Big Data** es un concepto que nace de la necesidad de manejar grandes cantidades de datos. La tendencia comenzó con compañías como YouTube al tener la necesidad de guardar y consultar mucha información de manera rápida.
+Es un gran movimiento que consiste en el uso de diferentes tipos de bases de datos.
+
+## Data warehouse
+
+**Data Warehouse** trata de guardar cantidades masivas de datos para la posteridad. Allí se guarda todo lo que no está viviendo en la aplicación pero es necesario tenerlo.
+Debe servir para guardar datos por un largo periodo de tiempo y estos datos se deben poder usar para poder encontrar cuestiones interesantes para el negocio.
+
+**Las ventajas de tener un Data Warehouse son**:
+
+- Puedes tener una base de datos consolidada desde la cual se puede obtener información fiable en vez de varias fuentes de información con datos distintos y no procesados.
+- Almacena datos históricos a diferencia de los sistemas transaccionales.
+- Integra datos de diferentes fuentes de información lo cual reduce los tiempos de consultas para la gestión.
+- Mejora la calidad de los datos al documentar y estructurar la información.
+- Reestructura la información para que sea útil al usuario final. Al sintetizar los datos los niveles de complejidad disminuyen.
+
+La información ingresada al Data Warehouse debe pasar por el proceso ETL (Extract, Transform and Load). Este proceso que se explica con más detalle en otro artículo. Como se comenta más arriba la información ingresada al Data Warehouse debe ser integrada y limpia, objetivo que se logra a través del proceso ETL.
+
+**Entre las desventajas de un Data Warehouse están**:
+
+- Su elevado costo de implementación y mantención
+- Es solo aplicable a grandes empresas ya que el esfuerzo de crear un Data Warehouse sería muy superior a los beneficios obtenidos.
+
+## Data mining
+
+El **Data Mining** se dedica a minar datos, a extraerlos de donde sea que estén (archivos muertos, base de datos actual, etc…) y hacer sentido de ellos para darles un uso.
+
+**EJEMPLOS DE APLICACIONES DE LA MINERÍA DE DATOS**
+
+La capacidad predictiva del data mining ha cambiado el diseño de las estrategias empresariales. Ahora se puede entender el presente para anticiparse al futuro. Estos son algunos ejemplos de data mining en la industria actual:
+
+**Marketing**: La minería de datos se utiliza para explorar bases de datos cada vez mayores y mejorar la segmentación del mercado. Analizando las relaciones entre parámetros como edad de los clientes, género, gustos, etc., es posible adivinar su comportamiento para dirigir campañas personalizadas de fidelización o captación. El data mining en marketing predice también qué usuarios pueden darse de baja de un servicio, qué les interesa según sus búsquedas o qué debe incluir una lista de correo para lograr una tasa de respuesta mayor.
+
+**Comercio minorista**: Los supermercados, por ejemplo, emplean los patrones de compra conjunta para identificar asociaciones de productos y decidir cómo situarlos en los diferentes pasillos y estanterías de los lineales. El data mining detecta además qué ofertas son las más valoradas por los clientes o incrementa la venta en la cola de caja.
+
+**Banca**: Los bancos recurren a la minería de datos para entender mejor los riesgos del mercado. Es habitual que se aplique a la calificación crediticia (rating) y a sistemas inteligentes antifraude para analizar transacciones, movimientos de tarjetas, patrones de compra y datos financieros de los clientes. El data mining también permite a la banca conocer más sobre nuestras preferencias o hábitos en internet para optimizar el retorno de sus campañas de marketing, estudiar el rendimiento de los canales de venta o gestionar las obligaciones de cumplimiento de las regulaciones.
+
+**Medicina**: La minería de datos favorece diagnósticos más precisos. Al contar con toda la información del paciente —historial, examen físico y patrones de terapias anteriores— se pueden prescribir tratamientos más efectivos. También posibilita una gestión más eficaz, eficiente y económica de los recursos sanitarios al identificar riesgos, predecir enfermedades en ciertos segmentos de la población o pronosticar la duración del ingreso hospitalario. Detectar fraudes e irregularidades y estrechar vínculos con los pacientes al ahondar en el conocimiento de sus necesidades son también ventajas de emplear el data mining en medicina.
+
+**Televisión y radio**: Hay cadenas que aplican la minería de datos en tiempo real a sus registros de audiencia en televisión online (IPTV) y radio. Estos sistemas recaban y analizan sobre la marcha información anónima de las visualizaciones, las retransmisiones y la programación de los canales. Gracias al data mining se pueden emitir recomendaciones personalizadas a los radioyentes y telespectadores, conocer en directo sus intereses y su actividad, y entender mejor su conducta. Las cadenas obtienen, además, conocimiento muy valioso para sus anunciantes, que aprovechan estos datos para llegar con más precisión a sus clientes potenciales.
+
+## ETL
+
+[**ETL**](https://es.wikipedia.org/wiki/Extract,_transform_and_load "ETL") son las siglas de Extract, Transform, Load (extraer, transformar y cargar). Se trata de tomar datos de archivos muertos y convertirlos en algo que sea de utilidad para el negocio.
+También ayuda a tomar los datos vivos de la aplicación, transformarlos y guardarlos en un data warehouse periódicamente.
+
+- [**Data pipeline**](https://aws.amazon.com/es/datapipeline/ "Data pipeline")
+
+En linux se usan las tuberias pipeline para ir pasando la salida de un comando a la entrada de otro y sacar provecho de cada utilidad, para obtener el resultado deseado, en este caso supongo que esta relacionado con tratar pasandolos por direferentes “programas” y obtener los datos deseados y alojarlos en diferentes tipos de bases, a ver Amazon indica lo siguiente en uno de sus servicios:
+
+AWS Data Pipeline es un servicio web pensado para ayudarle a procesar datos y a transferirlos, de manera fiable y a intervalos definidos, entre diferentes servicios de almacenamiento e informática de AWS, así como entre orígenes de datos on-premise. Con AWS Data Pipeline, puede obtener acceso con regularidad a las ubicaciones en las que están almacenados los datos, transformarlos y procesarlos a escala, además de poder transferir los resultados con eficacia a los servicios de AWS como Amazon S3, Amazon RDS, Amazon DynamoDB y Amazon EMR.
+
+AWS Data Pipeline le ayuda a crear con facilidad cargas de trabajo de procesamiento de datos complejas que sean tolerantes a errores, replicables y de alta disponibilidad. No tiene que preocuparse por garantizar la disponibilidad de los recursos, administrar las dependencias entre tareas, reintentar errores transitorios ni de los tiempos de espera en tareas individuales o la creación de un sistema de notificación de errores. AWS Data Pipeline también le permite transferir y procesar datos que se hayan guardado con anterioridad en silos de información on-premise.
+
+## Business intelligence
+
+[**Business Intelligence**](https://es.wikipedia.org/wiki/Inteligencia_empresarial "Business Intelligence") es una parte muy importante de las carreras de datos ya que es el punto final del manejo de estos. Su razón de ser es tener la información lista, clara y que tenga todos los elementos para tomar decisiones en una empresa.
+Es necesario tener una buena sensibilidad por entender el negocio, sus necesidades y la información que puede llevar a tomar decisiones en el momento adecuado al momento de realizar business intelligence.
+
+- Es la forma correcta de presentación de información para que en una sola vista se pueda visualizar de manera completa y entendible los datos.
+
+- Es tomar los datos históricos para predecir comportamientos futuros. Tendencias, comportamientos, lo usuarios tienen esta monografía, se presenta en una región u otra, en fin es la presentación o representación de los patrones de comportamiento que reflejan los datos.
+
+## Machine Learning
+
+[**Machine Learning**](https://es.wikipedia.org/wiki/Aprendizaje_autom%C3%A1tico "machine learning") tiene significados que varían. Es una serie de técnicas que involucran la inteligencia artificial y la detección de patrones.
+Machine learning para datos tiene un gran campo de acción y es un paso más allá del business intelligence.
+Nos ayuda a hacer modelos que encuentran patrones fortuitos encontrando correlaciones inesperadas.
+
+- **IA**: abarca a machine learning y deep learning y busca eliminar al humano en la creación de algoritmos y que todo ese proceso lo haga una computadora
+
+- **Machine learning**: como dijo Israel, crea modelo y al señarle te encontrada modelos fortuitos, cuando le des una mar de datos él te va encontrar patrones
+
+- **Deep learning**: le busca sentido a los datos.
+
+Una IA es un sistema que es inteligente, usando machine learning puedes buscar en una BBDD cuando tus clientes te compran más y te daras cuenta que es en finales de años y usando deep learning la computadora es capaz de encontrar el porqué te compran más.
+
+**Tiene dos casos de uso particulares**:
+
+- Clasificación
+- Predicción
+
