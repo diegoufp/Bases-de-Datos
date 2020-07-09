@@ -166,14 +166,37 @@ SELECT database();
 
 - Crear una tabla:
 
-```
+```sql
 CREATE database blogpost;
 ```
 
 - Crear la tabla si aun no existe:
 
-```
+```sql
 CREATE DATABASE IF NOT EXISTS blogpost;
+```
+
+- Ver los warning:
+
+El error vs Warnings: la diferencia entre estos dos es que el error rompe cualquier flujo de trabajo que tengamos en nuestra aplicación mientras que el warnnigs nos muestra una advertencia que no rompe el flujo de trabajo workflow.
+
+```
+SHOW WARNINGS;
+```
+- Ver las columnas de nuestra tabla:
+
+```sql
+DESCRIBE authors;
+```
+
+```sql
+DESC authors;
+```
+
+- Describe la estructura de la bases de datos incluyendo más información:
+
+```sql 
+SHOW FULL COLUMNS FROM books;
 ```
 
 ### PRACTICA CREANDO UNA DATABASE DE LIBROS
@@ -216,21 +239,73 @@ Tambien existe la posibilidad de que un entero sea solo positivo, es decir que n
 
 - **TEXT**: Es meter tanto como se pueda. EJEMPLO Descripción de un libro
 
+- **ENUM**: Es una enumeracion de datos, es decir que yo le voy a decir a la base de datos cuales son las opciones que puede tomar esta columna.
 
+- **TIMESTAMP**:
+Está basado en el número epoch que es el 1 enero de 1970 hasta la fecha y es donde se determina el inicio de las computadoras y es un número entero que se guarda en segundos y permite hacer operaciones sobre el.
+
+- **DATETIME**:
+Este tipo de datos puede guardar cualquier valor de tipo fecha sin restricción. Incluso anterior a nuestra era. es por eso que las fechas de nacimiento de usuarios debe utilizar este valor para garantizar que podemos registrarlos con la fecha adecuada.
+
+- **TIMESTAMP vs DATETIME**: 
+  * TIMESTAMP “NO PUEDE HACER TODO LO DE DATETIME pero DATETIME SÍ PUEDE HACERLO DE UN TIMESTAMP”, 
+  * DATETIME no está guardado en segundos y no es tan eficiente para hacer cálculos.
+
+- **created_ad**:
+ Es una columna de buena práctica que permite saber cuando se creó un registro. Está utilizará un conjunto de propiedades llamada entre ella se colocará DEFAULT CURRENT_TIMESTAMP . Cuando se realiza un insert sí el valor de esta columna viene vacío colocará en la tupla el valor de la fecha en que se creó de manera automática.
+
+ ```sql
+ `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+ ```
+
+- **created_ad y updated_ad**:
+Es buena práctica tener una columna que permite saber el momento exacto en el que se crea un registro o se actualiza. Este tipo de dato se comporta más como una meta-información y nos puede ayudar por ejemplo a cuántos usuarios fueron creados en una fecha en específico, saber cuando una tupla se actualizó.
+
+```sql
+`updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ```
-CREATE TABLE `books` (
-  `book_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `author_id` int(10) unsigned DEFAULT NULL,
-  `title` varchar(100) NOT NULL,
-  `year` int(11) NOT NULL DEFAULT '1900',
-  `language` varchar(2) NOT NULL COMMENT 'ISO 639-1 Language code (2 chars)',
-  `cover_url` varchar(500) DEFAULT NULL,
-  `price` double(6,2) DEFAULT NULL,
-  `sellable` tinyint(1) NOT NULL DEFAULT '0',
-  `copies` int(11) NOT NULL DEFAULT '1',
-  `description` text,
-  PRIMARY KEY (`book_id`),
-  UNIQUE KEY `book_language` (`title`,`language`)
-) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8;
+
+- **NINGUNA TUPLA SE ELIMINA**:
+Es buena práctica no eliminar registros de una bases de datos es por ello que se crea una columna como active que es un valor booleano dicho valor sirve para para decir si el registro está activo o no. Ejemplo:
+
+```sql
+active TINYINT(1) NOT NULL DEFAULT 1
 ```
+
+```sql
+CREATE TABLE IF NOT EXISTS `books` (
+  `book_id` INTEGER UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, `author_id` INTEGER UNSIGNED, `title` VARCHAR(100) NOT NULL, `year` INTEGER UNSIGNED NOT NULL DEFAULT '1900', `language` VARCHAR(2) NOT NULL DEFAULT 'es' COMMENT 'ISO 639-1 Language', `cover_url` varchar(500), `price` DOUBLE(6,2) NOT NULL DEFAULT 10.0, `sellable` TINYINT(1) DEFAULT '1', `copies` INTEGER NOT NULL DEFAULT '1', `description` TEXT
+);
+```
+
+```sql
+CREATE TABLE IF NOT EXISTS `authors` (
+  `author_id` INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT, `name` VARCHAR(100) NOT NULL, `nationality` VARCHAR(3)
+);
+```
+
+```sql
+CREATE TABLE clients (
+  `client_id` INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT, `name` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(100) NOT NULL UNIQUE,
+  `birthdate` DATETIME,
+  `gender` ENUM('M', 'F', 'ND') NOT NULL,
+  active TINYINT(1) NOT NULL DEFAULT 1,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+```
+
+```sql
+CREATE TABLE IF NOT EXISTS operations(
+  `operation_id`,
+  `book_id`,
+  `client_id`,
+  `type` ENUM('prestado', 'devuelto', 'vendido'),
+  `created_at`,
+  `updated_at`,
+  `finshed` TINYIT(1) NOT NULL
+);
+```
+
+
 
