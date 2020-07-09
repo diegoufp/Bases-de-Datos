@@ -297,15 +297,36 @@ CREATE TABLE clients (
 
 ```sql
 CREATE TABLE IF NOT EXISTS operations(
-  `operation_id`,
-  `book_id`,
-  `client_id`,
-  `type` ENUM('prestado', 'devuelto', 'vendido'),
-  `created_at`,
-  `updated_at`,
-  `finshed` TINYIT(1) NOT NULL
+  `operation_id` INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  `book_id` INTEGER UNSIGNED,
+  `client_id` INTEGER UNSIGNED,
+  `type` ENUM('P', 'D', 'V'),
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `finshed` TINYINT(1) NOT NULL DEFAULT '0'
 );
 ```
+#### INSERT
 
+Formas en la que se puede usar el INSERT.
 
+- Depende de la configuracion puede que te marque un warning por dejar un valor vacio.
+
+```sql
+INSERT INTO authors(`author_id`, `name`, `nationality`) VALUES('','Juan Rulfo','MEX');
+```
+
+```sql
+INSERT INTO authors(`name`, `nationality`) VALUES('Gabriel Garcia Marquez', 'COL');
+```
+
+```sql
+INSERT INTO authors VALUES ('', 'Juan Gabriel Vasquez', 'COL')
+```
+- Si tienes una lista de n cantidad de datos que quieras insertar en una sola table, no necesitas hacer una sentencia cada vez.
+Una recomendacion es hacer inserciones de 50, esto por si llegara a haber una problema con la conexion no se perderian tantos datos, se puede establecer un numero maximo en la configuracion.
+
+```sql
+INSERT INTO authors(`name`, `nationality`) VALUES ('Julio Cortazar', 'ARG'), ('Isabel Allende', 'CHI'), ('Octavio Paz', 'MEX'), ('Juan Carlos Onetti', 'URU');
+```
 
