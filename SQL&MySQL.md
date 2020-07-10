@@ -198,6 +198,7 @@ DESC authors;
 ```sql 
 SHOW FULL COLUMNS FROM books;
 ```
+- Al hacer un select from where cerrar con \G para presentación más legible.
 
 ### PRACTICA CREANDO UNA DATABASE DE LIBROS
 
@@ -218,6 +219,10 @@ Tambien existe la posibilidad de que un entero sea solo positivo, es decir que n
 - **INTEGER**: Es un entero,Ocupa 4 bytes.
 
 - **AUTO_INCREMENT**: Hace enteros que se auto incrementan, se meten a una dupla y detecta el numero para hacerlo crecer automáticamente. *Al borrar un dato de MYSQL no lo nota y sigue aumentando números, EJEMPLO 1 2 4, si se elimina el 3 no le importa y sigue contando.
+
+- **KEY UPDATE**: cuando encuentre un duplicado, actualiza con el nuevo valor que envió.
+
+- **IGNORE ALL**: si hay error ignore y ejecute el comando. **NO USAR NUNCA ESTE COMANDO**
 
 - **UNSIGNED**: solo aceptará enteros positivos.
 
@@ -321,7 +326,7 @@ INSERT INTO authors(`name`, `nationality`) VALUES('Gabriel Garcia Marquez', 'COL
 ```
 
 ```sql
-INSERT INTO authors VALUES ('', 'Juan Gabriel Vasquez', 'COL')
+INSERT INTO authors VALUES ('', 'Juan Gabriel Vasquez', 'COL');
 ```
 - Si tienes una lista de n cantidad de datos que quieras insertar en una sola table, no necesitas hacer una sentencia cada vez.
 Una recomendacion es hacer inserciones de 50, esto por si llegara a haber una problema con la conexion no se perderian tantos datos, se puede establecer un numero maximo en la configuracion.
@@ -330,3 +335,24 @@ Una recomendacion es hacer inserciones de 50, esto por si llegara a haber una pr
 INSERT INTO authors(`name`, `nationality`) VALUES ('Julio Cortazar', 'ARG'), ('Isabel Allende', 'CHI'), ('Octavio Paz', 'MEX'), ('Juan Carlos Onetti', 'URU');
 ```
 
+```sql
+INSERT INTO`clients`(client_id, name, email, birthdate, gender, active) VALUES
+	(1,'Maria Dolores Gomez','Maria Dolores.95983222J@random.names','1971-06-06','F',1),
+	(2,'Adrian Fernandez','Adrian.55818851J@random.names','1970-04-09','M',1),
+	(3,'Maria Luisa Marin','Maria Luisa.83726282A@random.names','1957-07-30','F',1),
+	(4,'Pedro Sanchez','Pedro.78522059J@random.names','1992-01-31','M',1);
+```
+
+```sql
+INSERTINTO clients(name, email, birthdate,gender, active) VALUES ('Pedro Sanchez','Pedro.78522059J@random.names','1992-01-31','M',1);
+```
+- **ON DUPLICATE KEY**: En dato duplicado que debe hacer. Se explican dos opciones
+
+    * **IGNORE ALL**: si hay error ignore y ejecute el comando. no usar nunca
+    * **KEY UPDATE**: cuando encuentre un duplicado, actualiza con el nuevo valor que envió.
+
+```sql
+INSERTINTO clients(name, email, birthdate, gender, active) VALUES 
+('Pedro Sanchez','Pedro.78522059J@random.names','1992-01-31','M',0)
+ON DUPLICATE KEY UPDATE active = VALUES(active);
+```
