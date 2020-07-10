@@ -200,6 +200,10 @@ SHOW FULL COLUMNS FROM books;
 ```
 - Al hacer un select from where cerrar con \G para presentación más legible.
 
+```sql
+SELECT * FROM clients WHERE client_id = 4\G
+```
+
 ### PRACTICA CREANDO UNA DATABASE DE LIBROS
 
 Una buena practica es que cada tabla se llame en el plural de la entidad que vamos a guardar.
@@ -276,6 +280,7 @@ Es buena práctica no eliminar registros de una bases de datos es por ello que s
 ```sql
 active TINYINT(1) NOT NULL DEFAULT 1
 ```
+### Ejemplo de la informacion
 
 ```sql
 CREATE TABLE IF NOT EXISTS `books` (
@@ -356,3 +361,25 @@ INSERTINTO clients(name, email, birthdate, gender, active) VALUES
 ('Pedro Sanchez','Pedro.78522059J@random.names','1992-01-31','M',0)
 ON DUPLICATE KEY UPDATE active = VALUES(active);
 ```
+
+#### Inserción de datos usando queries anidados
+
+Supongamos que insertamos un libro, pero como el autor es de tipo integer, por referencia lógica a la tabla authors, en un primer momento tenemos que hacer un select a la tabla authors, fijarse que id tiene el autor en cuestión y regresar a insertar el registro.
+
+```sql
+INSERT INTO books(title, author_id) VALUES ('El Laberinto de la Soledad', 6);
+```
+
+Sin embargo al usar INSERT con SELECT anidados, podemos saltarnos el paso de hacer el select previo a la tabla de autores y colocarlo internamente en la consulta de insercción
+
+Para el campo author_id, su valor lo obtengo de una subconsulta, de ahí que este entre parentesis, para que se haga primero.
+
+```sql
+INSERT INTO books (title, author_id, year) VALUES ('Vuelta al laberinto de la Soledad', (SELECT author_id FROM authors WHERE name = 'Octavio Paz' LIMIT 1), 1960);
+```
+
+LIMIT 1; Esta sentencia limita sólo traer la primera ocurrencia. Esa sentencia sumamente importante cuando decidimos traer un registro.
+
+Los sub-querys normalmente tienen una notación On una función exponencial.Los sub-querys pueden tardar sé demasiado y también puede insertar datos erróneos en el caso de los insert anidados.
+
+manejese con cuidado los querys anidados.
