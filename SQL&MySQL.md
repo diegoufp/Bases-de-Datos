@@ -234,6 +234,8 @@ Tambien existe la posibilidad de que un entero sea solo positivo, es decir que n
 
 - **SMALLINT**: Ocupa 2 byes.
 
+- **BETWEEN**: Sirve para numero y para fechas, sirve como minitador.
+
 - **Varchar**: Tu le tienes que indicar el numero de caracteres a almacenar de texto.EJEMPLO VARCHAR(2) SI.
 
 - **NOTNULL**: Es decirle a MYSQL que no almacene algo ,algo nulo es que no existe información, en otras palabras es nada.
@@ -383,3 +385,375 @@ LIMIT 1; Esta sentencia limita sólo traer la primera ocurrencia. Esa sentencia 
 Los sub-querys normalmente tienen una notación On una función exponencial.Los sub-querys pueden tardar sé demasiado y también puede insertar datos erróneos en el caso de los insert anidados.
 
 manejese con cuidado los querys anidados.
+
+## Bash y archivos SQL
+
+Comando para ejecutar nuestro script SQL con el comando mysql:
+
+```
+mysql -u root -p < all_schema.sql
+```
+
+Ejecutar nuestro script directamante en una base de datos especifica (en este caso en “cursoplatzi” ):
+
+```
+mysql -u root -p -D cursoplatzi < al_data.sql
+```
+
+## Su majestad el SELECT
+
+- Listar todas la tuplas de la tabla clients
+```sql
+SELECT * FROM clients;
+```
+
+- Listar todos los nombres de la tabla clients
+```sql
+SELECT name FROM clients;
+```
+
+- Listar todos los nombres, email y género de la tabla clients:
+```sql
+SELECT name, email, gender FROM clients;
+```
+
+- Listar los 10 primeros resultados de la tabla clients
+```sql
+SELECT name, email, gender FROM clients LIMIT 10;
+```
+
+- Listar todos los clientes de género Masculino
+```sql
+SELECT name, email, gender FROM clients WHERE gender = 'M';
+```
+
+- Listar el año de nacimientos de los clientes, con la función YEAR()
+```sql
+SELECTYEAR(birthdate) FROM clients;
+```
+
+- Mostrar el año actual
+```sql
+SELECT YEAR(NOW());
+```
+
+- Listar los 10 primeros resultados de las edades de los clientes
+```sql
+SELECT YEAR(NOW()) - YEAR(birthdate) FROM clients LIMIT 10;
+```
+
+- Listar nombre y edad de los 10 primeros clientes
+```sql
+SELECT name, YEAR(NOW()) - YEAR(birthdate) FROM clients LIMIT 10;
+```
+
+- Listar clientes que coincidan con el nombre de "Saave"
+```sql
+SELECT * FROM clients WHERE name LIKE'%Saave%';
+```
+
+- Listar clientes (nombre, email, edad y género). con filtro de genero = F y nombre que coincida con 'Lop'.
+Usando alias para nombrar la función como 'edad'
+```sql
+SELECT name, email, YEAR(NOW()) - YEAR(birthdate) AS edad, gender FROM clients WHERE gender = 'F' AND name LIKE '%Lop%';
+```
+
+- Listar con dos filtros
+```sql
+SELECT * FROM authors WHERE author_id > 0 and author_id <= 5;
+```
+
+o
+
+```sql
+SELECT book_id, author_id, title FROM books WHERE author_id BETWEEN 1 and 5;
+```
+
+## Comando JOIN
+
+Los JOIN es tomar dos tablas relacionarlas y desplegar esa informacion ya relacionada.
+
+- Listar todos los autores con ID entre 1 y 5 con los filtro mayor y menor igual
+```sql
+SELECT * FROM authors WHERE author_id > 0 AND author_id <= 5;
+```
+
+- Listar todos los autores con ID entre 1 y 5 con el filtro BETWEEN
+```sql
+SELECT * FROM authors WHERE author_id BETWEEN 1 AND 5;
+```
+
+- Listar los libros con filtro de author_id entre 1 y 5
+```sql
+SELECT book_id, author_id, title FROM books WHERE author_id BETWEEN 1 AND 5;
+```
+
+- Listar nombre y titulo de libros mediante el JOIN de las tablas books y authors
+```sql
+SELECT b.book_id, a.name, a.author_id, b.title
+FROM books AS b
+JOIN authors AS a
+  ON a.author_id = b.author_id
+WHERE a.author_id BETWEEN 1 AND 5;
+```
+
+- Listar transactions con detalle de nombre, titulo y tipo. 
+Con los filtro genero = F y tipo = Vendido.
+
+- Haciendo join entre transactions, books y clients.
+```sql
+SELECT c.name, b.title, t.type
+FROM transactions AS t
+JOIN books AS b
+  ON t.book_id = b.book_id
+JOIN clients AS c
+  ON t.client_id = c.client_id
+WHERE c.gender = 'F'
+  AND t.type = 'sell';
+```
+
+- Listar transactions con detalle de nombre, titulo, autoor y tipo. Con los filtro genero = M y de tipo = Vendido y Devuelto.
+- Haciendo join entre transactions, books, clients y authors.
+```sql
+SELECT c.name, b.title, a.name, t.type
+FROM transactions AS t
+JOIN books AS b
+  ON t.book_id = b.book_id
+JOIN clients AS c
+  ON t.client_id = c.client_id
+JOINauthors AS a
+  ON b.author_id = a.author_id
+WHERE c.gender = 'M'
+  AND t.type IN ('sell', 'lend');
+```
+
+### INNER JOIN
+
+Devuelve todas las filas cuando hay al menos una coincidencia en ambas tablas.
+
+- Sin JOIN y con JOIN
+
+Hay una gran diferencia entre el **JOIN implicito ** Y es el RENDIMIENTO sobre la ejecución de la consulta. Esto solo se evidencia al manejar consultas con multiples tablas y dichas tablas una cantidad importante de registros, ademas que es mas claro en la lectura del codigo.
+
+Por lo anterior es mejor siempre el INNER JOIN
+
+```sql
+SELECT b.title, a.name 
+FROM authors AS a, books AS b 
+WHERE a.author_id = b.author_id 
+LIMIT 10;
+```
+```sql
+SELECT b.title, a.name 
+FROM books AS b 
+INNER JOIN authors AS a ON a.author_id = b.author_id 
+LIMIT 10;
+```
+### LEFT JOIN
+Devuelve todas las filas de la tabla de la izquierda, y las filas coincidentes de la tabla de la derecha.
+
+```sql
+SELECT a.author_id, a.name, a.nationality, b.title FROM authors AS a JOIN books AS b ON b.author_id = a.author_id WHERE a.author_id BETWEEN 1 and 5 ORDER BY a.author_id DESC;
+```
+- LEFT JOIN para traer datos incluso que no existen, como el caso del author_id = 4 que no tene ningún libro registrado.
+
+```sql
+SELECT a.author_id, a.name, a.nationality, b.title FROM authors AS a LEFT JOIN books AS b ON b.author_id = a.author_id WHERE a.author_id BETWEEN 1 and 5 ORDER BY a.author_id ;
+```
+
+- Contar número de libros tiene un autor. Con COUNT (contar), es necesario tener un GROUP BY (agrupado por un criterio)
+```sql
+SELECT a.author_id, a.name, a.nationality, COUNT(b.book_id)
+FROM authors AS a
+LEFT JOIN books AS b
+  ON b.author_id = a.author_id
+WHERE a.author_id BETWEEN 1 AND 5
+GROUP BY a.author_id
+ORDER BY a.author_id;
+```
+
+### TIPS DE JOIN
+
+Existen diferentes formas en las que se pueden unir las tablas en nuestras consultas y de acuerdo con esta unión se va a mostrar información, y es importante siempre tener clara esta relación. En esta clase te voy a mostrar gráficamente 7 diferentes tipos de uniones que puedes realizar.
+
+Usar correctamente estas uniones puede reducir el tiempo de ejecución de tus consultas y mejorar el rendimiento de tus aplicaciones.
+
+Como yo lo veo cuando hacemos uniones en las consultas para seleccionar información, estamos trabajando con tablas, estas tablas podemos verlas como conjuntos de información, de forma que podemos asimilar los joins entre tablas como uniones e intersecciones entre conjuntos.
+
+Supongamos que contamos con dos conjuntos, el conjunto A y el conjunto B, o, la tabla A y la tabla B. Sobre estos conjuntos veamos cuál es el resultado si aplicamos diferentes tipos de join.
+
+1. Inner Join
+
+Esta es la forma mas fácil de seleccionar información de diferentes tablas, es tal vez la que mas usas a diario en tu trabajo con bases de datos. Esta union retorna todas las filas de la tabla A que coinciden en la tabla B. Es decir aquellas que están en la tabla A Y en la tabla B, si lo vemos en conjuntos la intersección entre la tabla A y la B.
+
+Esto lo podemos implementar de esta forma cuando estemos escribiendo las consultas:
+```sql
+SELECT <columna_1> , <columna_2>,  <columna_3> ... <columna_n> 
+FROM Tabla_A A
+INNER JOIN Tabla_B B
+ON A.pk = B.pk
+```
+
+2. Left Join
+
+Esta consulta retorna todas las filas que están en la tabla A y ademas si hay coincidencias de filas en la tabla B también va a traer esas filas.
+
+Esto lo podemos implementar de esta forma cuando estemos escribiendo las consultas:
+```sql
+SELECT <columna_1> , <columna_2>,  <columna_3> ... <columna_n> 
+FROM Tabla_A A
+LEFT JOIN Tabla_B B
+ON A.pk = B.pk
+```
+
+3. Right Join
+
+Esta consulta retorna todas las filas de la tabla B y ademas si hay filas en la tabla A que coinciden también va a traer estas filas de la tabla A.
+
+Esto lo podemos implementar de esta forma cuando estemos escribiendo las consultas:
+```sql
+SELECT <columna_1> , <columna_2>,  <columna_3> ... <columna_n>
+FROM Tabla_A A
+RIGHT JOIN Tabla_B B
+ON A.pk = B.pk
+```
+
+4. Outer Join
+
+Este join retorna TODAS las filas de las dos tablas. Hace la union entre las filas que coinciden entre la tabla A y la tabla B.
+
+Esto lo podemos implementar de esta forma cuando estemos escribiendo las consultas:
+```sql
+SELECT <columna_1> , <columna_2>,  <columna_3> ... <columna_n>
+FROM Tabla_A A
+FULL OUTER JOIN Tabla_B B
+ON A.pk = B.pk
+```
+
+5. Left excluding join
+
+Esta consulta retorna todas las filas de la tabla de la izquierda, es decir la tabla A que no tienen ninguna coincidencia con la tabla de la derecha, es decir la tabla B.
+
+Esto lo podemos implementar de esta forma cuando estemos escribiendo las consultas:
+```sql
+SELECT <columna_1> , <columna_2>,  <columna_3> ... <columna_n>
+FROM Tabla_A A
+LEFT JOIN Tabla_B B
+ON A.pk = B.pk
+WHERE B.pk IS NULL
+```
+
+6. Right Excluding join
+
+Esta consulta retorna todas las filas de la tabla de la derecha, es decir la tabla B que no tienen coincidencias en la tabla de la izquierda, es decir la tabla A.
+
+Esto lo podemos implementar de esta forma cuando estemos escribiendo las consultas:
+```sql
+SELECT <columna_1> , <columna_2>,  <columna_3> ... <columna_n>
+FROM Tabla_A A
+RIGHT JOIN Tabla_B B
+ON A.pk = B.pk
+WHERE A.pk IS NULL
+```
+
+7. Outer excluding join
+
+Esta consulta retorna todas las filas de la tabla de la izquierda, tabla A, y todas las filas de la tabla de la derecha, tabla B que no coinciden.
+
+Esto lo podemos implementar de esta forma cuando estemos escribiendo las consultas:
+```sql
+SELECT <select_list>
+FROM Table_A A
+FULL OUTER JOIN Table_B B
+ON A.Key = B.Key
+WHERE A.Key IS NULL OR B.Key IS NULL
+```
+
+### EJEMPLOS DE QUERYS
+
+- ¿Qué nacionalidades hay?
+```sql
+SELECT nationality FROM authors GROUP BY nationality;
+```
+- ¿Cuantos escritores hay de cada nacionalidad?
+```sql
+SELECT nationality, COUNT(author_id) as qty_authors FROM authors GROUP BY nationality;
+```
+- ¿Cuantos libros hay de cada nacionalidad?
+```sql
+SELECT a.nationality, COUNT(b.book_id) as qty_book
+FROM books as b
+JOIN authors as a
+ON b.author_id = a.author_id
+GROUP BY a.nationality;
+```
+- ¿Cual es el promedio/desviacion standard del precio de los libros?
+```sql
+SELECT AVG(price) as avg_price, STDDEV(price) as stddev_price FROM books;
+```
+- ¿Cual es el precio maximo/minimo de un libro?
+```sql
+SELECT MAX(price) as max_price, MIN(price) as min_price FROM books;
+```
+- ¿Cual es el precio maximo/minimo de un libro?
+```sql
+SELECT c.name, t.type, b.title, a.name, a.nationality
+FROM transactions as t
+LEFT JOIN clients as c
+ON c.client_id = t.client_id
+LEFT JOIN books as b
+ON b.book_id = t.book_id
+LEFT JOIN authorsas a
+ON b.author_id = a.author_id;
+```
+
+- ¿Cuál es el promedio/desviación standard del precio de libros?
+```sql
+SELECT a.nationality,  
+  AVG(b.price) AS promedio, 
+  STDDEV(b.price) AS std 
+FROM books AS b
+JOIN authorsAS a
+  ON a.author_id = b.author_id
+GROUP BY a.nationality
+ORDER BY promedio DESC;
+```
+
+- ¿Cuál es el promedio/desviación standard del precio de libros por nacionalidad?
+-- Agrupar por la columna pivot
+```sql
+SELECT a.nationality,
+  COUNT(b.book_id) AS libros,  
+  AVG(b.price) AS promedio, 
+  STDDEV(b.price) AS std 
+FROM books AS b
+JOINauthors AS a
+  ON a.author_id = b.author_id
+GROUP BY a.nationality
+ORDER BY libros DESC;
+```
+
+- ¿Cuál es el precio máximo/mínimo de un libro?
+```sql
+SELECT nationality, MAX(price), MIN(price)
+FROM books AS b
+JOIN authors AS a
+  ON a.author_id = b.author_id
+GROUP BY nationality;
+```
+
+- ¿cómo quedaría el reporte de préstamos?
+ CONCAT: para concatenar en cadenas de texto.
+TO_DAYS: recibe un timestamp ó un datetime
+```sql
+SELECT c.name, t.type, b.title, 
+  CONCAT(a.name, " (", a.nationality, ")") AS autor,
+  TO_DAYS(NOW()) - TO_DAYS(t.created_at)
+FROM transactions AS t
+LEFT JOIN clients AS c
+  ON c.client_id = t.client_id
+LEFT JOIN books AS b
+  ON b.book_id = t.book_id
+LEFT JOIN authors AS a
+  ON b.author_id = a.author_id;
+```
