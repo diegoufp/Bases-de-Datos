@@ -204,6 +204,15 @@ SHOW FULL COLUMNS FROM books;
 SELECT * FROM clients WHERE client_id = 4\G
 ```
 
+- Mostrar 10 resuldados aleatorios, pero no es eficiente computacionalmente.
+```sql
+SELECT * FROM authors ORDER BY RAND() LIMIT 10;
+```
+
+- Contar puedes contar con COUNT(*), pero una buena practica es se lo mas especificos posibles, en vez de asterisco podrias poner el id.
+```sql
+SELECT COUNT(book_id) FROM books; 
+
 ### PRACTICA CREANDO UNA DATABASE DE LIBROS
 
 Una buena practica es que cada tabla se llame en el plural de la entidad que vamos a guardar.
@@ -249,6 +258,8 @@ Tambien existe la posibilidad de que un entero sea solo positivo, es decir que n
 - **FLOAT**: Es un numero que esta almacenando hasta 6 decimales, es para cálculos precisos.
 
 - **TEXT**: Es meter tanto como se pueda. EJEMPLO Descripción de un libro
+
+- **DIFERENTE**: diferente en mysql es <> no es !=
 
 - **ENUM**: Es una enumeracion de datos, es decir que yo le voy a decir a la base de datos cuales son las opciones que puede tomar esta columna.
 
@@ -756,4 +767,110 @@ LEFT JOIN books AS b
   ON b.book_id = t.book_id
 LEFT JOIN authors AS a
   ON b.author_id = a.author_id;
+```
+
+## UPDATE Y DELETE
+
+La recomendacion antes de hacer alguna modificacion es siempre usar un **SELECT** para ver los campos que quieres modificar.
+
+Y nunca te olvides de **WHERE** en este tipo de comandos
+
+### UPDATE
+
+Como no siempre borrar un dato es la mejor opcion, es recomendable al momento de crear una tabla es tener siempre un booleano con la opcion de **active**.
+
+Este es el comando basico de un update:
+```sql
+UPDATE <tabla>
+SET <columna = valor, ...>
+WHERE <condiciones>
+LIMIT 1;
+```
+EJEMPLO:
+```sql
+UPDATE clients SET active = 0 WHERE client_id = 80 LIMIT 1;
+```
+
+- Hacer update a varios
+```sql
+SELECT client_id, name, active FROM clients WHERE client_id IN (1,6,8,27,90) OR name LIKE '%Lopez%';
+```
+
+```sql
+UPDATE clients SET active = 0 WHERE client_id IN (1,6,8,27,90) OR name LIKE '%Lopez%'; 
+
+### DELETE
+
+- Borrar un autor en especifico
+
+Es recomendable el poner un **LIMIT** por si llegase a ocurrir un inconveniente, por ejemplo, una condicion que no se pone, que este delete no vaya a borrar de mas informacion.
+```sql
+DELETE FROM authors WHERE author_id = 161 LIMIT = 1;
+```
+
+- Borrar el contenido de la tabla dejando la estructura
+```sql
+SELECT * FROM transactions;
+
+TRUNCATE transactions;
+```
+## SUPER QUERYS
+
+- Lo que va ahcer el **COUNT** es sumar 1 cada vez que pasa por un renglon que cumpla los requisitos que le pedimos.
+```sql
+SELECT count(book_id) FROM books;
+```
+
+- El **SUM** va  a operar cada vez que el query vaya avanzando uno por uno dentro de las tuplas. En este caso saldra lo mismo en las dos columnas.
+```sql
+SELECT count(book_id), sum(1) from books;
+```
+
+- Sumar el precio de los libros que tengo por vender.
+```sql
+SELECT SUM(price) FROM books WHERE sellable = 1;
+```
+
+- El numero de copias por el valor de cada una.
+```sql
+SELECT SUM(price*copies) FROM books WHERE sellable = 1;
+```
+
+- Valor de libros que no estan a la venta y  que si estan a la venta.
+```sql
+SELECT sellable, SUM(prince*copies) FROM books GROUP BY sellable;
+```
+- Cuantos libros hay antes de cierta fecha.
+```sql
+SELECT COUNT(book_id), SUM(IF(YEAR < 1950, 1, 0)) AS `<1950` FROM books;
+```
+```sql
+SELECT COUNT(book_id) FROM books WHERE YEAR < 1950;
+```
+
+- Cuantos libros hay antes de cierta fecha y cuantos posteriores a esa fecha.
+```sql
+SELECT COUNT(book_id), SUM(IF(YEAR < 1950, 1, 0)) AS `<1950`, SUM(IF(YEAR < 1950, 0, 1)) AS `>1950` FROM books;
+```
+```sql
+SELECT nationality, COUNT(book_id), 
+SUM(IF(year < 1950, 1, 0)) AS "<1950", 
+SUM(IF(year >= 1950 and year < 1990, 1, 0)) AS "<1990", 
+SUM(IF(year >= 1990 and year < 2000, 1, 0)) AS "<2000",
+SUM(IF(year >= 2000, 1, 0)) AS "<hoy"
+FROM books;
+```
+
+- Cuantos libros hay antes de cierta fecha y cuantos posteriores a esa fecha, por cada pais.
+```sql
+SELECT nationality, COUNT(book_id), 
+SUM(IF(year < 1950, 1, 0)) AS "<1950" 
+SUM(IF(year >= 1950 and year < 1990, 1, 0)) AS "<1990" 
+SUM(IF(year >= 1990 and year < 2000, 1, 0)) AS "<2000"
+SUM(IF(year >= 2000, 1, 0)) AS "<hoy"
+FROM books AS b
+JOIN authors AS a
+ON a.author_id = b.author_id
+WHERE a.nationality IS NOT NULL
+GROUP BY nationality;
 ```
