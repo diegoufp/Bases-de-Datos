@@ -875,3 +875,29 @@ ON a.author_id = b.author_id
 WHERE a.nationality IS NOT NULL
 GROUP BY nationality;
 ```
+
+## COMANDO mysqldump
+
+Lo que haremos es un BACKUP de las tablas.
+Con la herramienta mysqldump, la cual es una herramienta de sistema.(en la terminal de comandos). Lo aplicaremos en dos casos muy particulares:
+
+1. Traer todo nuestra base de datos a un archivo de texto.(esquema y datos).
+
+2. Traer solamente el esquema de la base de datos a un archivo de texto.
+
+Es muy importante el saber diferenciar esots casos.
+
+Una de las practicas comunes es versionar el **eschema** de una base de datos. Versionar los **datos** no es recomendable, los datos se respaldan no se versionan. Lo que puede cambiar en una palicacion es como se modifica el esquema. Es bueno que el esquema este versionado con el codigo hasta cierto punto.
+
+- En la terminal de comandos
+
+1. Traer la base de datos completa (esquema y datos)
+```
+mysqldump -u root -p cursoplatzi > esquema.sql
+```
+
+2. Traer la estructura de la base de datos (squema)
+```
+mysqldump -u root -p -d cursoplatzi > esquema.sql
+```
+
