@@ -212,6 +212,7 @@ SELECT * FROM authors ORDER BY RAND() LIMIT 10;
 - Contar puedes contar con COUNT(*), pero una buena practica es se lo mas especificos posibles, en vez de asterisco podrias poner el id.
 ```sql
 SELECT COUNT(book_id) FROM books; 
+```
 
 ### PRACTICA CREANDO UNA DATABASE DE LIBROS
 
